@@ -1,6 +1,6 @@
-./engine.pl ./source/perl.pl 
-./engine.pl 'node ./source/node.js'
-./engine.pl 'ruby ./source/ruby.rb'
-# ./engine.pl './source/swift.swift'
-./engine.pl './compiled/swift'
-# ./engine.pl ./compiled/a.out
+./engine/engine.pl ./source/perl.pl 
+./engine/engine.pl 'node ./source/node.js'
+./engine/engine.pl 'ruby ./source/ruby.rb'
+# ./engine/engine.pl './source/swift.swift'
+./engine/engine.pl './compiled/swift'
+# ./engine/engine.pl ./compiled/a.out
