@@ -23,10 +23,12 @@ def shellsSort(arr)
 end
 
 a = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+c = 0
 
-for c in 0...10000000
-  a = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
-  shellsSort(a)
+while (c < 10000000) do
+    shellsSort(a)
+    a = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
+    c = c + 1
 end
 
 p "ruby 123\n"

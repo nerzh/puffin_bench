@@ -24,10 +24,12 @@ func shellsSort<T : Comparable>(_ arr: inout [T]) {
 }
 
 var a = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+var c = 0
 
-for _ in 0...10000000 {
-    a = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+while (c < 10000000) {
     shellsSort(&a)
+    a = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+    c = c + 1
 }
 
 print("swift 123")

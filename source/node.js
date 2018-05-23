@@ -40,12 +40,13 @@ function shellsSort(arr) {
 }
 
 var a = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
-var c;
+var c = 0;
 
-for(c = 0; c < 10000000; c++){
-  a = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
-  // a = a.sort();
-  shellsSort(a);
+while (c < 10000000) {
+	// a = a.sort();
+    shellsSort(a);
+    a = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
+    c = c + 1
 }
 
 console.log('node 123');
