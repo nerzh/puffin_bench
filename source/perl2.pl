@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/usr/bin/env perl
 
 sub shellsSort {
     my $n     = $#arr + 1;

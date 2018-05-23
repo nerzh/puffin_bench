@@ -1,4 +1,4 @@
-#!/usr/bin/swift
+#!/usr/bin/env swift
 
 func shellsSort<T : Comparable>(_ arr: inout [T]) {
     let n = arr.count
@@ -32,4 +32,4 @@ while (c < 10000000) {
     c = c + 1
 }
 
-print("swift 123")
+print("Swift")

@@ -1,3 +1,4 @@
+#!/usr/bin/env ruby
 
 def shellsSort(arr)
 	n = arr.count

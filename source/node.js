@@ -1,20 +1,4 @@
-// var c;
-// var b = 0;
-// var d = "aaa.html";
-
-// const fs = require('fs');
-
-// var contents = fs.readFileSync('./file.txt', 'utf8');
-// //console.log(contents);
-// // var arr = contents.match(/valerich123/g);
-
-// // for(c = 0; c < arr.length; c++) {
-// //   b++;
-// // }
-
-// // //b = arr.length;
-
-// console.log('node ' + b);
+#!/usr/bin/env node
 
 function shellsSort(arr) {
     let n    = arr.length
@@ -49,4 +33,4 @@ while (c < 10000000) {
     c = c + 1
 }
 
-console.log('node 123');
+console.log('Node');

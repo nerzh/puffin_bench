@@ -1,3 +1,5 @@
+#!/usr/bin/env php
+
 <?php 
 
     function shellsSort(& $arr) {
@@ -32,7 +34,7 @@
         $c = $c + 1;
     }
 
-    echo "PHP 123\n";
+    echo "PHP\n";
 
 
 

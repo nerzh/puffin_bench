@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/usr/bin/env perl
 
 sub shellsSort {
     my $n     = $#arr + 1;
@@ -25,7 +25,7 @@ sub shellsSort {
 
 our @arr = (9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
 
-for (my $c=0; $i < 10000000; $c++) {
+for (my $c=0; $c < 10000000; $c++) {
     shellsSort();
     @arr = (9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
 }

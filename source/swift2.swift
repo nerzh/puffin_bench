@@ -1,4 +1,4 @@
-//#!/usr/bin/swift
+#!/usr/bin/env swift
 
 func shellsSort() {
     let n = arr.count
