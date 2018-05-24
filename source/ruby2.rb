@@ -32,4 +32,4 @@ while (c < 10000000) do
     c = c + 1
 end
 
-p "Ruby global array\n"
+p "Ruby global array #{`ruby -v`}"

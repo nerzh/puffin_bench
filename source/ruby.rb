@@ -32,4 +32,4 @@ while (c < 10000000) do
     c = c + 1
 end
 
-p "ruby 123\n"
+p "Ruby #{`ruby -v`}\n"
