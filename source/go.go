@@ -1,5 +1,7 @@
 package main
 import "fmt"
+import "os"
+import "os/exec"
 
 func shellsSort(arr []int) []int {
     n    := len(arr)
@@ -31,9 +33,17 @@ func pr(arr []int){
     }
 }
 
+func go_version() {
+    output, err := exec.Command("go", "version").CombinedOutput()
+    if err != nil {
+        os.Stderr.WriteString(err.Error())
+    }
+    fmt.Println(string(output))
+}
+
 func main() {
     c := 0
-    for c < 10000000 {
+    for c < 100000000 {
         arr := []int{9,8,7,6,5,4,3,2,1,0}
         // shellsSort(&arr)
         shellsSort(arr)
@@ -41,5 +51,6 @@ func main() {
         c++
     }
 
+    go_version()
     fmt.Println("GO")
 }

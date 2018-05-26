@@ -26,7 +26,7 @@ func shellsSort<T : Comparable>(_ arr: inout [T]) {
 var a : [Int] = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
 var c : Int   = 0
 
-while (c < 10000000) {
+while (c < 100000000) {
     shellsSort(&a)
     a = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
     c = c + 1
