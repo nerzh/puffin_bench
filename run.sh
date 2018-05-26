@@ -1,17 +1,28 @@
-# ./engine/engine.pl './source/perl.pl'
-# ./engine/engine.pl './source/perl2.pl'
-# ./engine/engine.pl './source/php.php'
-# ./engine/engine.pl './source/php2.php'
-./engine/engine.pl './source/node.js'
-# ./engine/engine.pl './source/node2.js'
-./engine/engine.pl './source/ruby.rb'
-# ./engine/engine.pl './source/ruby2.rb'
-# ./engine/engine.pl './source/python.py'
-# ./engine/engine.pl './source/python2.py'
-# ./engine/engine.pl './source/kotlin.kts'
+exec_bench() {
+
+  if [ `uname -s` = Linux ]; then
+  	bash -lc "/usr/bin/time -f '%E real, %U user, %S sys, %K memory, %P CPU' bash -lc '$1'"
+  else
+  	bash -lc "/usr/bin/time -l bash -lc '$1'"
+  fi
+}
+
+# exec_bench './source/perl.pl'
+# exec_bench './source/perl2.pl'
+# exec_bench './source/php.php'
+# exec_bench './source/php2.php'
+exec_bench './source/node.js'
+# exec_bench './source/node2.js'
+# exec_bench 'ruby ./source/ruby.rb'
+# exec_bench './source/ruby2.rb'
+# exec_bench './source/python.py'
+# exec_bench './source/python2.py'
+# exec_bench './source/kotlin.kts'
+# exec_bench './source/elixir.ex'
+exec_bench 'go run ./source/go.go'
 swiftc -O ./source/swift.swift -o ./compiled/swift
 # swiftc -O ./source/swift2.swift -o ./compiled/swift2
-./engine/engine.pl './compiled/swift'
-# ./engine/engine.pl './compiled/swift2'
+exec_bench './compiled/swift'
+# exec_bench './compiled/swift2'
 
-# ./engine/engine.pl ./compiled/a.out
+# exec_bench ./compiled/a.out

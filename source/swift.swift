@@ -1,10 +1,10 @@
 #!/usr/bin/env swift
 
 func shellsSort<T : Comparable>(_ arr: inout [T]) {
-    let n = arr.count
-    var gap = n/2
-    var i  = 0
-    var j  = 0
+    let n    : Int = arr.count
+    var gap  : Int = n/2
+    var i    : Int = 0
+    var j    : Int = 0
     var temp : T
     
     while gap > 0 {
@@ -23,8 +23,8 @@ func shellsSort<T : Comparable>(_ arr: inout [T]) {
     }
 }
 
-var a = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
-var c = 0
+var a : [Int] = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+var c : Int   = 0
 
 while (c < 10000000) {
     shellsSort(&a)
