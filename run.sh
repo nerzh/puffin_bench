@@ -19,10 +19,11 @@ exec_bench './source/node.js'
 # exec_bench './source/python2.py'
 # exec_bench './source/kotlin.kts'
 # exec_bench './source/elixir.ex'
-exec_bench 'go run ./source/go.go'
 swiftc -O ./source/swift.swift -o ./compiled/swift
 # swiftc -O ./source/swift2.swift -o ./compiled/swift2
 exec_bench './compiled/swift'
 # exec_bench './compiled/swift2'
+go build -o ./compiled/go ./source/go.go
+exec_bench './compiled/go'
 
 # exec_bench ./compiled/a.out
