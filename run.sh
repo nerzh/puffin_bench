@@ -1,5 +1,4 @@
 exec_bench() {
-
   if [ `uname -s` = Linux ]; then
   	bash -lc "/usr/bin/time -f '%E real, %U user, %S sys, %K memory, %P CPU' bash -lc '$1'"
   else
@@ -13,7 +12,7 @@ exec_bench() {
 # exec_bench './source/php2.php'
 exec_bench './source/node.js'
 # exec_bench './source/node2.js'
-# exec_bench 'ruby ./source/ruby.rb'
+# exec_bench './source/ruby.rb'
 # exec_bench './source/ruby2.rb'
 # exec_bench './source/python.py'
 # exec_bench './source/python2.py'
