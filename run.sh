@@ -1,8 +1,20 @@
 exec_bench() {
   if [ `uname -s` = Linux ]; then
-  	bash -lc "/usr/bin/time -f '%E real, %U user, %S sys, %K memory, %P CPU' bash -lc '$1'"
+		exec 3>&1 4>&2
+  	TT=$( { /usr/bin/time -f '%e sec.' $1 1>&3; } 2>&1 )
+  	printf "\033[1m"
+   	printf "$TT"
+  	printf "\033[0m"
+  	echo "";
+  	echo "---";
   else
-  	bash -lc "/usr/bin/time -l bash -lc '$1'"
+		exec 3>&1 4>&2
+  	TT=$( { /usr/bin/time $1 1>&3; } 2>&1 )
+  	printf "\033[1m"
+   	printf "$TT"
+  	printf "\033[0m"
+  	echo "";
+  	echo "---";
   fi
 }
 
@@ -25,5 +37,6 @@ exec_bench 'swiftc -O ./source/swift.swift -o ./compiled/swift && ./compiled/swi
 # go build -o ./compiled/go ./source/go.go
 exec_bench 'go build -o ./compiled/go ./source/go.go && ./compiled/go'
 
-# gcc -O3 -o ./compiled/c.exe ./source/c.c
-exec_bench 'gcc -O3 -o ./compiled/c.exe ./source/c.c && ./compiled/c.exe'
+gcc -O2 -o ./compiled/c.exe ./source/c.c
+exec_bench "./compiled/c.exe"
+# echo "eto Teee -> $T"
