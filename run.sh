@@ -30,12 +30,12 @@ exec_bench './source/node.js'
 # exec_bench './source/python2.py'
 # exec_bench './source/kotlin.kts'
 # exec_bench './source/elixir.ex'
-# swiftc -O ./source/swift.swift -o ./compiled/swift
+swiftc -O ./source/swift.swift -o ./compiled/swift
 # swiftc -O ./source/swift2.swift -o ./compiled/swift2
-exec_bench 'swiftc -O ./source/swift.swift -o ./compiled/swift && ./compiled/swift'
+exec_bench './compiled/swift'
 # exec_bench './compiled/swift2'
-# go build -o ./compiled/go ./source/go.go
-exec_bench 'go build -o ./compiled/go ./source/go.go && ./compiled/go'
+go build -o ./compiled/go ./source/go.go
+exec_bench './compiled/go'
 
 gcc -O2 -o ./compiled/c.exe ./source/c.c
 exec_bench "./compiled/c.exe"
