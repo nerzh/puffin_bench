@@ -33,6 +33,6 @@ while ($c < 100000000) {
     $c = $c + 1;
 }
 
-print "Perl STUPID ASSHOLE FUCK SHIT CRAZY LINKS";
+print "Perl\n";
 
 1;
