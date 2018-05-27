@@ -5,36 +5,4 @@
 # or operating system, you probably want to add a global ignore instead:
 #   git config --global core.excludesfile '~/.gitignore_global'
 
-# Ignore bundler config.
-/.bundle
-
-# Ignore the default SQLite database.
-/db/*.sqlite3
-/db/*.sqlite3-journal
-
-# Ignore all logfiles and tempfiles.
-/log/*
-!/log/.keep
-/tmp
-
-#
-/config/database.yml
-/.idea
-/.byebug_history
 *.DS_Store
-/doc
-/public
-/config/puma.rb
-/shared
-/vendor/assets
-!/Gemfile.lock
-
-# CHEF
-/chef/berks_cookbooks/
-/chef/data_bags_decrypted
-/chef/.chef
-!/chef/.chef/knife.rb
-
-
-!/lib/wood_shop
-/compiled/*
