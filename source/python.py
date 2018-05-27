@@ -23,7 +23,7 @@ def shellsSort(arr):
 a = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
 c = 0
 
-while (c < 100000000):
+while (c < 10000000):
     shellsSort(a)
     a = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
     c = c + 1
