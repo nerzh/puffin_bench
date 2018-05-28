@@ -1,4 +1,5 @@
 bash -lc 'mkdir ./compiled' 2>/dev/null
+bash -lc 'mkdir ./store' 2>/dev/null
 
 exec_bench() {
   if [ `uname -s` = Linux ]; then
@@ -24,7 +25,7 @@ exec_bench() {
 # exec_bench './source/perl2.pl'
 # exec_bench './source/php.php'
 # exec_bench './source/php2.php'
-exec_bench './source/node.js'
+# exec_bench './source/node.js'
 # exec_bench './source/node2.js'
 exec_bench './source/node3.js'
 # exec_bench './source/ruby.rb'
@@ -34,11 +35,12 @@ exec_bench './source/node3.js'
 # exec_bench './source/kotlin.kts'
 # exec_bench './source/elixir.ex'
 
-swiftc -O ./source/swift.swift -o ./compiled/swift
-exec_bench './compiled/swift'
+# swiftc -O ./source/swift.swift -o ./compiled/swift
+# exec_bench './compiled/swift'
 # swiftc -O ./source/swift2.swift -o ./compiled/swift2
 # exec_bench './compiled/swift2'
 swiftc -O ./source/swift3.swift -o ./compiled/swift3
+# swiftc ./source/swift3.swift -o ./compiled/swift3
 exec_bench './compiled/swift3'
 
 # go build -o ./compiled/go ./source/go.go
