@@ -32,4 +32,14 @@ while (c < 10000000) {
     c = c + 1
 }
 
-print("Swift global array")
+@discardableResult
+func shell(_ args: [String]) -> Int32 {
+    let task = Process()
+    task.launchPath = "/usr/bin/env"
+    task.arguments = args
+    task.launch()
+    task.waitUntilExit()
+    return task.terminationStatus
+}
+
+shell(["bash", "-lc", "swift --version | grep version"])
