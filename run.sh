@@ -21,30 +21,39 @@ exec_bench() {
   fi
 }
 
-# exec_bench './source/perl.pl'
-# exec_bench './source/perl2.pl'
-# exec_bench './source/php.php'
-# exec_bench './source/php2.php'
-# exec_bench './source/node.js'
-# exec_bench './source/node2.js'
-exec_bench './source/node3.js'
-# exec_bench './source/ruby.rb'
-# exec_bench './source/ruby2.rb'
-# exec_bench './source/python.py'
-# exec_bench './source/python2.py'
-# exec_bench './source/kotlin.kts'
-# exec_bench './source/elixir.ex'
+################################################### 1-sortArray
+# exec_bench './source/1-sortArray/perl.pl'
+# exec_bench './source/1-sortArray/php.php'
+exec_bench './source/1-sortArray/node.js'
+# exec_bench './source/1-sortArray/ruby.rb'
+# exec_bench './source/1-sortArray/python.py'
+# exec_bench './source/1-sortArray/kotlin.kts'
+# exec_bench './source/1-sortArray/elixir.ex'
+swiftc -O -whole-module-optimization ./source/1-sortArray/swift.swift -o ./compiled/swift
+exec_bench './compiled/swift'
 
-# swiftc -O ./source/swift.swift -o ./compiled/swift
-# exec_bench './compiled/swift'
-# swiftc -O ./source/swift2.swift -o ./compiled/swift2
+go build -o ./compiled/go ./source/1-sortArray/go.go
+exec_bench './compiled/go'
+
+gcc -O2 -o ./compiled/c.exe ./source/1-sortArray/c.c
+exec_bench "./compiled/c.out"
+
+################################################### 2-sortGlobalArray
+# exec_bench './source/2-sortGlobalArray/perl2.pl'
+# exec_bench './source/2-sortGlobalArray/php2.php'
+# exec_bench './source/2-sortGlobalArray/node2.js'
+# exec_bench './source/2-sortGlobalArray/ruby2.rb'
+# exec_bench './source/2-sortGlobalArray/python2.py'
+# swiftc -O -whole-module-optimization ./source/2-sortGlobalArray/swift2.swift -o ./compiled/swift2
 # exec_bench './compiled/swift2'
-swiftc -O ./source/swift3.swift -o ./compiled/swift3
-# swiftc ./source/swift3.swift -o ./compiled/swift3
-exec_bench './compiled/swift3'
 
-# go build -o ./compiled/go ./source/go.go
-# exec_bench './compiled/go'
+################################################### 3-writeToFile
+# exec_bench './source/3-writeToFile/node3.js'
 
-gcc -O2 -o ./compiled/c.exe ./source/c.c
-exec_bench "./compiled/c.exe"
+# swiftc -O -whole-module-optimization ./source/3-writeToFile/swift3.swift -o ./compiled/swift3
+# swiftc -O -num-threads 8 ./source/3-writeToFile/swift3.swift -o ./compiled/swift3
+# swiftc -whole-module-optimization -Ounchecked ./source/3-writeToFile/swift3.swift -o ./compiled/swift3
+# swiftc -Osize ./source/3-writeToFile/swift3.swift -o ./compiled/swift3
+# exec_bench './compiled/swift3'
+
+

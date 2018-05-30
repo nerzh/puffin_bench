@@ -97,24 +97,94 @@ func writeString(_ path: String, _ text: String) {
 var a : [Int]  = makeRandomArray(10)
 var c : Int    = 0
 var p : String = "./store/swift.txt"
+let s : String = "./store/swift.txt\n"
 clearFile(p)
 
-// while (c < 2000000) {
-while (c < 20000) {
-    shellsSort(&a)
-    writeString(p, "\(a)\n")
-    // a = makeRandomArray(10)
-    revertArray(&a)
-    writeString(p, "\(a)\n")
-    // a = makeRandomArray(10)
-    iterateArray(&a)
-    writeString(p, "\(a)\n")
+// class A {
+//     init() {
+//         var myThread = Thread(target: self, selector: #selector(self.myThreadMainMethod), object: nil)    
+//     }
+// }
+var ff = false
 
-    if evenHundred(c) {
-        a.insert(c, at: arc4random_uniform2(9))
-    } else {
-        a.remove(at: arc4random_uniform2(9))
+let t = Thread() {
+    let s = "xxxxxxxxx\n"
+    var c = 0
+    while (c < 10000) {
+
+        // shellsSort(&a)
+        // writeString(p, "\(a)\n")
+        writeString(p, s)
+        // a = makeRandomArray(10)
+        // revertArray(&a)
+        // writeString(p, "\(a)\n")
+        // a = makeRandomArray(10)
+        // iterateArray(&a)
+        // writeString(p, "\(a)\n")
+
+        // if evenHundred(c) {
+        //     a.insert(c, at: arc4random_uniform2(9))
+        // } else {
+        //     a.remove(at: arc4random_uniform2(9))
+        // }
+        c = c + 1
     }
+    ff = true
+}
+
+t.start()
+
+
+wait(ff)
+
+let customSerialQueue = DispatchQueue(label: "com.yogevsitton.MyApp.myCustomSerialQueue")
+
+customSerialQueue.async {
+    // let s = "xxxxxxxxx\n"
+    // var c = 0
+    // while (c < 10000) {
+
+    //     // shellsSort(&a)
+    //     // writeString(p, "\(a)\n")
+    //     writeString(p, s)
+    //     // a = makeRandomArray(10)
+    //     // revertArray(&a)
+    //     // writeString(p, "\(a)\n")
+    //     // a = makeRandomArray(10)
+    //     // iterateArray(&a)
+    //     // writeString(p, "\(a)\n")
+
+    //     // if evenHundred(c) {
+    //     //     a.insert(c, at: arc4random_uniform2(9))
+    //     // } else {
+    //     //     a.remove(at: arc4random_uniform2(9))
+    //     // }
+    //     c = c + 1
+    // }
+}
+
+// print("ttt5")
+// print("ttt6")
+// print("ttt7")
+// print("ttt8")
+
+// while (c < 2000000) {
+while (c < 10000) {
+    // shellsSort(&a)
+    // writeString(p, "\(a)\n")
+    writeString(p, s)
+    // a = makeRandomArray(10)
+    // revertArray(&a)
+    // writeString(p, "\(a)\n")
+    // a = makeRandomArray(10)
+    // iterateArray(&a)
+    // writeString(p, "\(a)\n")
+
+    // if evenHundred(c) {
+    //     a.insert(c, at: arc4random_uniform2(9))
+    // } else {
+    //     a.remove(at: arc4random_uniform2(9))
+    // }
     c = c + 1
 }
 

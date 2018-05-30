@@ -43,7 +43,7 @@ func go_version() {
 
 func main() {
     c := 0
-    for c < 10000000 {
+    for c < 15000000 {
         arr := []int{9,8,7,6,5,4,3,2,1,0}
         // shellsSort(&arr)
         shellsSort(arr)

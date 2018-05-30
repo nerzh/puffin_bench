@@ -33,7 +33,7 @@ int main() {
   int arr[10];
   int c = 0;
 
-  while(c < 10000000) {
+  while(c < 15000000) {
     arr[0] = 9;
     arr[1] = 8;
     arr[2] = 7;

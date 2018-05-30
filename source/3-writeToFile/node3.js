@@ -83,24 +83,26 @@ function writeString(path, text) {
 var a = makeRandomArray(10);
 var c = 0;
 var p = './store/node.txt';
+var s = "./store/swift.txt\n";
 clearFile(p);
 
 // while (c < 2000000) {
 while (c < 20000) {
-    shellsSort(a);
-    writeString(p, `[${a.join(', ')}]\n`)
+    // shellsSort(a);
+    // writeString(p, `[${a.join(', ')}]\n`)
+    writeString(p, s)
     // a = makeRandomArray(10);
-    revertArray(a);
-    writeString(p, `[${a.join(', ')}]\n`)
+    // revertArray(a);
+    // writeString(p, `[${a.join(', ')}]\n`)
     // a = makeRandomArray(10);
-    iterateArray(a);
-    writeString(p, `[${a.join(', ')}]\n`)
+    // iterateArray(a);
+    // writeString(p, `[${a.join(', ')}]\n`)
 
-    if (evenHundred(c)) {
-        a.splice(randomIntInc (0, 9), 0, c);
-    } else {
-        a.splice(randomIntInc (0, 9), 1);
-    }
+    // if (evenHundred(c)) {
+    //     a.splice(randomIntInc (0, 9), 0, c);
+    // } else {
+    //     a.splice(randomIntInc (0, 9), 1);
+    // }
     c = c + 1
 }
 
