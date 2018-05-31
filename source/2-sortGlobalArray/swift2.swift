@@ -1,10 +1,12 @@
 #!/usr/bin/env swift
 
+import Foundation
+
 func shellsSort() {
-    let n : Int = arr.count
-    var gap : Int = n/2
-    var i  : Int = 0
-    var j  : Int = 0
+    let n    : Int = arr.count
+    var gap  : Int = n/2
+    var i    : Int = 0
+    var j    : Int = 0
     var temp : Int
     
     while gap > 0 {
@@ -23,23 +25,25 @@ func shellsSort() {
     }
 }
 
-var arr : Array<Int> = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
-var c : Int = 0
+var arr : [Int] = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+var c   : Int   = 0
 
-while (c < 10000000) {
+while (c < 15000000) {
     shellsSort()
     arr = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
     c = c + 1
 }
 
-@discardableResult
-func shell(_ args: [String]) -> Int32 {
+// print version
+// @discardableResult
+// func shell(_ args: [String]) -> Int32 {
+func shell(_ args: [String]) {
     let task = Process()
     task.launchPath = "/usr/bin/env"
     task.arguments = args
     task.launch()
-    task.waitUntilExit()
-    return task.terminationStatus
+    // task.waitUntilExit()
+    // return task.terminationStatus
 }
-
 shell(["bash", "-lc", "swift --version | grep version"])
+print("Swift sort global array")

@@ -26,12 +26,12 @@ sub shellsSort {
 our @arr = (9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
 my $c = 0;
 
-while ($c < 10000000) {
+while ($c < 15000000) {
     shellsSort();
     @arr = (9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
     $c = $c + 1;
 }
 
-print "Perl global array\n";
+print "Perl sort global array\n";
 
 1;

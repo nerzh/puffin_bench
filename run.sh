@@ -35,25 +35,30 @@ exec_bench './compiled/swift'
 go build -o ./compiled/go ./source/1-sortArray/go.go
 exec_bench './compiled/go'
 
-gcc -O2 -o ./compiled/c.exe ./source/1-sortArray/c.c
+gcc -O2 -o ./compiled/c.out ./source/1-sortArray/c.c
 exec_bench "./compiled/c.out"
 
 ################################################### 2-sortGlobalArray
 # exec_bench './source/2-sortGlobalArray/perl2.pl'
 # exec_bench './source/2-sortGlobalArray/php2.php'
-# exec_bench './source/2-sortGlobalArray/node2.js'
+exec_bench './source/2-sortGlobalArray/node2.js'
 # exec_bench './source/2-sortGlobalArray/ruby2.rb'
 # exec_bench './source/2-sortGlobalArray/python2.py'
-# swiftc -O -whole-module-optimization ./source/2-sortGlobalArray/swift2.swift -o ./compiled/swift2
-# exec_bench './compiled/swift2'
+
+swiftc -O -whole-module-optimization ./source/2-sortGlobalArray/swift2.swift -o ./compiled/swift2
+exec_bench './compiled/swift2'
 
 ################################################### 3-writeToFile
-# exec_bench './source/3-writeToFile/node3.js'
+exec_bench './source/3-writeToFile/node3.js'
 
-# swiftc -O -whole-module-optimization ./source/3-writeToFile/swift3.swift -o ./compiled/swift3
-# swiftc -O -num-threads 8 ./source/3-writeToFile/swift3.swift -o ./compiled/swift3
-# swiftc -whole-module-optimization -Ounchecked ./source/3-writeToFile/swift3.swift -o ./compiled/swift3
-# swiftc -Osize ./source/3-writeToFile/swift3.swift -o ./compiled/swift3
-# exec_bench './compiled/swift3'
+swiftc -O -whole-module-optimization ./source/3-writeToFile/swift3.swift -o ./compiled/swift3
+exec_bench './compiled/swift3'
+
+
+################################################### 4-Thread
+# exec_bench './source/4-Thread/node4.js'
+
+# swiftc -O -whole-module-optimization ./source/4-Thread/swift4.swift -o ./compiled/swift4
+# exec_bench './compiled/swift4'
 
 

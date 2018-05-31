@@ -81,7 +81,7 @@ defmodule M do
 	end
 end
 
-M.main(10000000)
+M.main(15000000)
 M.pr("ELIXIR")
 
 

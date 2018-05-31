@@ -23,9 +23,9 @@ def shellsSort():
 arr = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
 c = 0
 
-while (c < 10000000):
+while (c < 15000000):
     shellsSort()
     a = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
     c = c + 1
 
-print("Python global array\n")
+print("Python sort global array\n")

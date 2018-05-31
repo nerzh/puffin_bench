@@ -1,7 +1,5 @@
 #!/usr/bin/env node
 
-var cmd=require('node-cmd');
-
 function shellsSort() {
     let n    = arr.length
     let gap  = Math.floor(n/2)
@@ -26,17 +24,12 @@ function shellsSort() {
 }
 
 var arr = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
-var c = 0;
+var c   = 0;
 
-while (c < 10000000) {
+while (c < 15000000) {
     shellsSort();
     arr = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
     c = c + 1
 }
 
-cmd.get(
-    'node -v',
-    function(err, data, stderr){
-        console.log('Node ' + data);
-    }
-);
+console.log('Node ' + process.versions.node + ' sort global array');
