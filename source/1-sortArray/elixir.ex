@@ -1,7 +1,7 @@
 #!/usr/bin/env elixir
 
 defmodule W do
-	def halt() do
+  def halt() do
     IO.puts "halt"
     System.halt(0)
   end
