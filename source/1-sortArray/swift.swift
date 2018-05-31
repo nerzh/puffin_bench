@@ -11,13 +11,13 @@ func shellsSort<T : Comparable>(_ arr: inout [T]) {
         i = gap
         while i < n {
             temp = arr[i]
-            j = i
+            j    = i
             while (j >= gap && arr[j - gap] > temp) {
                 arr[j] = arr[j - gap]
-                j = j - gap
+                j      = j - gap
             }
             arr[j] = temp
-            i = i + 1
+            i      = i + 1
         }
         gap = gap/2
     }
