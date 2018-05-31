@@ -6,7 +6,7 @@ exec_bench() {
     exec 3>&1 4>&2
     TT=$( { /usr/bin/time -f '%e sec.' $1 1>&3; } 2>&1 )
     printf "\033[1m"
-    	printf "$TT"
+    printf "$TT"
     printf "\033[0m"
     echo "";
     echo "---";
@@ -14,7 +14,7 @@ exec_bench() {
     exec 3>&1 4>&2
     TT=$( { /usr/bin/time $1 1>&3; } 2>&1 )
     printf "\033[1m"
-    	printf "$TT"
+    printf "$TT"
     printf "\033[0m"
     echo "";
     echo "---";
