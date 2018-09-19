@@ -1,5 +1,7 @@
 #!/usr/bin/env swift
 
+import Foundation
+
 func shellsSort<T : Comparable>(_ arr: inout [T]) {
     let n    : Int = arr.count
     var gap  : Int = n/2
@@ -23,13 +25,30 @@ func shellsSort<T : Comparable>(_ arr: inout [T]) {
     }
 }
 
-var a : [Int] = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
-var c : Int   = 0
 
-while (c < 15000000) {
-    shellsSort(&a)
-    a = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
-    c = c + 1
+
+func main() {
+  var a : [Int] = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+  var c : Int   = 0
+
+  while (c < 15000000) {
+      shellsSort(&a)
+      a = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+      c = c + 1
+  }
 }
 
-print("Swift")
+main()
+
+
+func shell(_ args: [String]) {
+    let task = Process()
+    task.launchPath = "/usr/bin/env"
+    task.arguments = args
+    task.launch()
+    // task.waitUntilExit()
+    // return task.terminationStatus
+}
+
+print("Swift sort array")
+shell(["bash", "-lc", "swift --version | grep version"])

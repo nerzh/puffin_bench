@@ -2,7 +2,10 @@
 
 import Foundation
 
-func shellsSort() {
+class TestGlobalArr {
+  var arr : [Int] = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+
+  func shellsSort() {
     let n    : Int = arr.count
     var gap  : Int = n/2
     var i    : Int = 0
@@ -23,16 +26,20 @@ func shellsSort() {
         }
         gap = gap/2
     }
+  }
+
+  func main() {
+    var c : Int = 0
+
+    while (c < 15000000) {
+        shellsSort()
+        arr = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+        c = c + 1
+    }
+  }
 }
 
-var arr : [Int] = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
-var c   : Int   = 0
-
-while (c < 15000000) {
-    shellsSort()
-    arr = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
-    c = c + 1
-}
+TestGlobalArr().main()
 
 // print version
 // @discardableResult

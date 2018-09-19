@@ -32,4 +32,5 @@ while (c < 15000000) {
   c = c + 1
 }
 
-console.log('Node ' + process.versions.node + ' sort global array')
+console.log('NodeJS sort global array')
+console.log('NodeJS ' + process.versions.node)

@@ -23,13 +23,18 @@ function shellsSort(arr) {
   }
 }
 
-var a = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
-var c = 0;
+function main() {
+  var a = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
+  var c = 0;
 
-while (c < 15000000) {
-  shellsSort(a);
-  a = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
-  c = c + 1
+  while (c < 15000000) {
+    shellsSort(a);
+    a = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
+    c = c + 1
+  }  
 }
 
+main()
+
+console.log('NodeJS sort array');
 console.log('Node ' + process.versions.node);
