@@ -1,6 +1,6 @@
 #!/usr/bin/env swift
 
-import Foundation
+import Darwin
 
 func main() {
     var count          : Int    = 0
@@ -33,4 +33,4 @@ func shell(_ args: [String]) {
     task.launch()
 }
 shell(["bash", "-lc", "swift --version | grep version"])
-print("Swift write to file")
+print("Swift POSIX write to file")
