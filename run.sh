@@ -84,7 +84,9 @@ exec_bench './source/3-writeToFile/node3.js'
 swiftc -O -whole-module-optimization ./source/3-writeToFile/swift3.swift -o ./compiled/swift3
 exec_bench './compiled/swift3'
 
-
+# Swift-POSIX
+swiftc -O -whole-module-optimization ./source/3-writeToFile/swift3-posix.swift -o ./compiled/swift3-posix
+exec_bench './compiled/swift3-posix'
 ################################################### 4-Thread
 # ... coming soon ...
 
