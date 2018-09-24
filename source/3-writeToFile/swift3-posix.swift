@@ -1,6 +1,6 @@
 #!/usr/bin/env swift
 
-import Darwin
+import Foundation
 
 func main() {
     var count          : Int    = 0
