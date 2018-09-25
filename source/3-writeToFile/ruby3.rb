@@ -1,7 +1,7 @@
 #!/usr/bin/env ruby
 
 def clearFile(path)
-  File.open(path, File::WRONLY) do |file|
+  File.open(path, File::WRONLY|File::CREAT) do |file|
     file.truncate(0)
   end
 end
