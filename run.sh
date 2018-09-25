@@ -81,7 +81,7 @@ exec_bench './compiled/swift2'
 exec_bench './source/3-writeToFile/node3.js'
 
 # RUBY
-exec_bench './source/3-writeToFile/ruby3.js'
+exec_bench './source/3-writeToFile/ruby3.rb'
 
 # Swift
 swiftc -O -whole-module-optimization ./source/3-writeToFile/swift3.swift -o ./compiled/swift3
