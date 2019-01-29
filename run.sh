@@ -45,7 +45,7 @@ exec_bench './source/1-sortArray/node.js'
 # exec_bench './source/1-sortArray/elixir.ex'
 
 # Swift
-swiftc -O -whole-module-optimization ./source/1-sortArray/swift.swift -o ./compiled/swift
+swiftc -Ounchecked -whole-module-optimization -Xcc -O2 ./source/1-sortArray/swift.swift -o ./compiled/swift
 exec_bench './compiled/swift'
 
 # GO
@@ -73,7 +73,7 @@ exec_bench './source/2-sortGlobalArray/node2.js'
 # exec_bench './source/2-sortGlobalArray/python2.py'
 
 # Swift
-swiftc -O -whole-module-optimization ./source/2-sortGlobalArray/swift2.swift -o ./compiled/swift2
+swiftc -Ounchecked -whole-module-optimization -Xcc -O2 ./source/2-sortGlobalArray/swift2.swift -o ./compiled/swift2
 exec_bench './compiled/swift2'
 
 ################################################### 3-writeToFile
@@ -84,11 +84,11 @@ exec_bench './source/3-writeToFile/node3.js'
 exec_bench './source/3-writeToFile/ruby3.rb'
 
 # Swift
-swiftc -O -whole-module-optimization ./source/3-writeToFile/swift3.swift -o ./compiled/swift3
+swiftc -Ounchecked -whole-module-optimization -Xcc -O2 ./source/3-writeToFile/swift3.swift -o ./compiled/swift3
 exec_bench './compiled/swift3'
 
 # Swift-POSIX
-swiftc -O -whole-module-optimization ./source/3-writeToFile/swift3-posix.swift -o ./compiled/swift3-posix
+swiftc -Ounchecked -whole-module-optimization -Xcc -O2 ./source/3-writeToFile/swift3-posix.swift -o ./compiled/swift3-posix
 exec_bench './compiled/swift3-posix'
 ################################################### 4-Thread
 # ... coming soon ...
