@@ -41,16 +41,17 @@ class TestGlobalArr {
 
 TestGlobalArr().main()
 
-// print version
-// @discardableResult
-// func shell(_ args: [String]) -> Int32 {
 func shell(_ args: [String]) {
     let task = Process()
-    task.launchPath = "/usr/bin/env"
     task.arguments = args
+    
+    #if swift(<5)
+    task.launchPath = "/usr/bin/env"
     task.launch()
-    // task.waitUntilExit()
-    // return task.terminationStatus
+    #else
+    task.executableURL = URL.init(fileURLWithPath: "/usr/bin/env")
+    try? task.run()
+    #endif
 }
 shell(["bash", "-lc", "swift --version | grep version"])
 print("Swift sort global array")

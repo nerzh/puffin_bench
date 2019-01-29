@@ -43,11 +43,15 @@ main()
 
 func shell(_ args: [String]) {
     let task = Process()
-    task.launchPath = "/usr/bin/env"
     task.arguments = args
+    
+    #if swift(<5)
+    task.launchPath = "/usr/bin/env"
     task.launch()
-    // task.waitUntilExit()
-    // return task.terminationStatus
+    #else
+    task.executableURL = URL.init(fileURLWithPath: "/usr/bin/env")
+    try? task.run()
+    #endif
 }
 
 print("Swift sort array")
