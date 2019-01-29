@@ -45,12 +45,12 @@ func shell(_ args: [String]) {
     let task = Process()
     task.arguments = args
     
-    #if swift(<5)
-    task.launchPath = "/usr/bin/env"
-    task.launch()
-    #else
+    #if swift(>=5)
     task.executableURL = URL.init(fileURLWithPath: "/usr/bin/env")
     try? task.run()
+    #else
+    task.launchPath = "/usr/bin/env"
+    task.launch()
     #endif
 }
 shell(["bash", "-lc", "swift --version | grep version"])
