@@ -14,7 +14,7 @@ var count          : Int    = 0
 var path           : String = "./store/swift.txt"
 let templateString : String = "test_text\n"
 var resultString   : String = ""
-clearFile(path)
+//clearFile(path)
 
 let fileHandl = try! FileHandle(forWritingTo: URL(fileURLWithPath: path))
 

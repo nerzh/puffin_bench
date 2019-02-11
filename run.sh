@@ -30,7 +30,7 @@ exec_bench() {
 # exec_bench './source/1-sortArray/php.php'
 
 # NodeJS
-exec_bench './source/1-sortArray/node.js'
+# exec_bench './source/1-sortArray/node.js'
 
 # Ruby
 # exec_bench './source/1-sortArray/ruby.rb'
@@ -45,8 +45,8 @@ exec_bench './source/1-sortArray/node.js'
 # exec_bench './source/1-sortArray/elixir.ex'
 
 # Swift
-swiftc -Ounchecked -whole-module-optimization -Xcc -O2 ./source/1-sortArray/swift.swift -o ./compiled/swift
-exec_bench './compiled/swift'
+# swiftc -Ounchecked -whole-module-optimization -Xcc -O2 ./source/1-sortArray/swift.swift -o ./compiled/swift
+# exec_bench './compiled/swift'
 
 # GO
 # go build -o ./compiled/go ./source/1-sortArray/go.go
@@ -64,7 +64,7 @@ exec_bench './compiled/swift'
 # exec_bench './source/2-sortGlobalArray/php2.php'
 
 # NodeJS
-exec_bench './source/2-sortGlobalArray/node2.js'
+# exec_bench './source/2-sortGlobalArray/node2.js'
 
 # Ruby
 # exec_bench './source/2-sortGlobalArray/ruby2.rb'
@@ -73,23 +73,27 @@ exec_bench './source/2-sortGlobalArray/node2.js'
 # exec_bench './source/2-sortGlobalArray/python2.py'
 
 # Swift
-swiftc -Ounchecked -whole-module-optimization -Xcc -O2 ./source/2-sortGlobalArray/swift2.swift -o ./compiled/swift2
-exec_bench './compiled/swift2'
+# swiftc -Ounchecked -whole-module-optimization -Xcc -O2 ./source/2-sortGlobalArray/swift2.swift -o ./compiled/swift2
+# exec_bench './compiled/swift2'
 
 ################################################### 3-writeToFile
 # NodeJS
-exec_bench './source/3-writeToFile/node3.js'
+# exec_bench './source/3-writeToFile/node3.js'
 
 # RUBY
-exec_bench './source/3-writeToFile/ruby3.rb'
+# exec_bench './source/3-writeToFile/ruby3.rb'
 
 # Swift
-swiftc -Ounchecked -whole-module-optimization -Xcc -O2 ./source/3-writeToFile/swift3.swift -o ./compiled/swift3
-exec_bench './compiled/swift3'
+# swiftc -Ounchecked -whole-module-optimization -Xcc -O2 ./source/3-writeToFile/swift3.swift -o ./compiled/swift3
+# exec_bench './compiled/swift3'
 
 # Swift-POSIX
-swiftc -Ounchecked -whole-module-optimization -Xcc -O2 ./source/3-writeToFile/swift3-posix.swift -o ./compiled/swift3-posix
-exec_bench './compiled/swift3-posix'
+# swiftc -Ounchecked -whole-module-optimization -Xcc -O2 ./source/3-writeToFile/swift3-posix.swift -o ./compiled/swift3-posix
+# exec_bench './compiled/swift3-posix'
+
+# Rust
+rustc ./source/3-writeToFile/rust3.rs -o ./compiled/rust3
+exec_bench './compiled/rust3'
 ################################################### 4-Thread
 # ... coming soon ...
 
