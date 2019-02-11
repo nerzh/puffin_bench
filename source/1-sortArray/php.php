@@ -34,6 +34,7 @@
       $c = $c + 1;
     }
 
-    echo "PHP\n";
+    $version = phpversion();
+    echo "PHP version: {$version}\n";
 
 ?>

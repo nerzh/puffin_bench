@@ -35,5 +35,7 @@
   }
 
   echo "PHP sort global array\n";
+  $version = phpversion();
+  echo "PHP version: {$version}\n";
 
 ?>
