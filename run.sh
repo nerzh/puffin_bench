@@ -73,12 +73,12 @@ exec_bench() {
 # exec_bench './source/2-sortGlobalArray/python2.py'
 
 # Swift
-# swiftc -Ounchecked -whole-module-optimization -Xcc -O2 ./source/2-sortGlobalArray/swift2_function.swift -o ./compiled/swift2_function
-# swiftc -Ounchecked -whole-module-optimization -Xcc -O2 ./source/2-sortGlobalArray/swift2_class.swift -o ./compiled/swift2_class
-# swiftc -Ounchecked -whole-module-optimization -Xcc -O2 ./source/2-sortGlobalArray/swift2_final_class.swift -o ./compiled/swift2_final_class
-# exec_bench './compiled/swift2_function'
-# exec_bench './compiled/swift2_class'
-# exec_bench './compiled/swift2_final_class'
+swiftc -Ounchecked -whole-module-optimization -Xcc -O2 ./source/2-sortGlobalArray/swift2_function.swift -o ./compiled/swift2_function
+swiftc -Ounchecked -whole-module-optimization -Xcc -O2 ./source/2-sortGlobalArray/swift2_class.swift -o ./compiled/swift2_class
+swiftc -Ounchecked -whole-module-optimization -Xcc -O2 ./source/2-sortGlobalArray/swift2_final_class.swift -o ./compiled/swift2_final_class
+exec_bench './compiled/swift2_function'
+exec_bench './compiled/swift2_class'
+exec_bench './compiled/swift2_final_class'
 
 ################################################### 3-writeToFile
 # NodeJS
