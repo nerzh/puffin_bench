@@ -2,7 +2,8 @@
 
 import Foundation
 
-class TestGlobalArr {
+// PAYLOAD
+final class TestGlobalArr {
   var arr : [Int] = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
 
   func shellsSort() {
@@ -39,8 +40,12 @@ class TestGlobalArr {
   }
 }
 
+// TEST
 TestGlobalArr().main()
 
+
+
+// PRINT SWIFT VERSION
 func shell(_ args: [String]) {
     let task = Process()
     task.arguments = args
@@ -54,4 +59,4 @@ func shell(_ args: [String]) {
     #endif
 }
 shell(["bash", "-lc", "swift --version | grep version"])
-print("Swift sort global array")
+print("Swift sort global array. FINAL CLASS CALL")

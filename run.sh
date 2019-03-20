@@ -73,8 +73,12 @@ exec_bench() {
 # exec_bench './source/2-sortGlobalArray/python2.py'
 
 # Swift
-# swiftc -Ounchecked -whole-module-optimization -Xcc -O2 ./source/2-sortGlobalArray/swift2.swift -o ./compiled/swift2
-# exec_bench './compiled/swift2'
+swiftc -Ounchecked -whole-module-optimization -Xcc -O2 ./source/2-sortGlobalArray/swift2_function.swift -o ./compiled/swift2_function
+swiftc -Ounchecked -whole-module-optimization -Xcc -O2 ./source/2-sortGlobalArray/swift2_class.swift -o ./compiled/swift2_class
+swiftc -Ounchecked -whole-module-optimization -Xcc -O2 ./source/2-sortGlobalArray/swift2_final_class.swift -o ./compiled/swift2_final_class
+exec_bench './compiled/swift2_function'
+exec_bench './compiled/swift2_class'
+exec_bench './compiled/swift2_final_class'
 
 ################################################### 3-writeToFile
 # NodeJS
@@ -92,8 +96,8 @@ exec_bench() {
 # exec_bench './compiled/swift3-posix'
 
 # Rust
-rustc ./source/3-writeToFile/rust3.rs -o ./compiled/rust3
-exec_bench './compiled/rust3'
+# rustc ./source/3-writeToFile/rust3.rs -o ./compiled/rust3
+# exec_bench './compiled/rust3'
 ################################################### 4-Thread
 # ... coming soon ...
 

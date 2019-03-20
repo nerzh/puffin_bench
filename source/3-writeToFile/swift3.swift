@@ -11,12 +11,12 @@ func clearFile(_ path: String) {
 }
 
 var count          : Int    = 0
-var path           : String = "./store/swift.txt"
+let path           : String = "./store/swift.txt"
 let templateString : String = "test_text\n"
 var resultString   : String = ""
-//clearFile(path)
+// clearFile(path)
 
-let fileHandl = try! FileHandle(forWritingTo: URL(fileURLWithPath: path))
+let fileHandl = try FileHandle(forWritingTo: URL(fileURLWithPath: path))
 
 while (count < 8000000) {
     resultString.append(templateString)
