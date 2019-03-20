@@ -2,23 +2,17 @@ bash -lc 'mkdir ./compiled' 2>/dev/null
 bash -lc 'mkdir ./store' 2>/dev/null
 
 exec_bench() {
+  exec 3>&1 4>&2
   if [ `uname -s` = Linux ]; then
-    exec 3>&1 4>&2
     TT=$( { /usr/bin/time -f '%e sec.' $1 1>&3; } 2>&1 )
-    printf "\033[1m"
-    printf "$TT"
-    printf "\033[0m"
-    echo "";
-    echo "---";
   else
-    exec 3>&1 4>&2
     TT=$( { /usr/bin/time $1 1>&3; } 2>&1 )
-    printf "\033[1m"
-    printf "$TT"
-    printf "\033[0m"
-    echo "";
-    echo "---";
   fi
+  printf "\033[1m"
+  printf "$TT"
+  printf "\033[0m"
+  echo "";
+  echo "---";
 }
 
 
