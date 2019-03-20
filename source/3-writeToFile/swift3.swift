@@ -2,31 +2,28 @@
 
 import Foundation
 
-func clearFile(_ path: String) {
-    do {
-        try "".write(to: URL(fileURLWithPath: path), atomically: true, encoding: String.Encoding.utf8)
-    } catch {
-        print("FAIL")
-    }
-}
+// PAYLOAD
+func main() {
+  var count          : Int    = 0
+  let path           : String = "./store/swift.txt"
+  let templateString : String = "test_text\n"
+  var resultString   : String = ""
 
-var count          : Int    = 0
-let path           : String = "./store/swift.txt"
-let templateString : String = "test_text\n"
-var resultString   : String = ""
-// clearFile(path)
-
-let fileHandl = try FileHandle(forWritingTo: URL(fileURLWithPath: path))
-
-while (count < 8000000) {
+  while (count < 8000000) {
     resultString.append(templateString)
     count += 1
-}
-// fileHandl.seekToEndOfFile()
-fileHandl.write(resultString.data(using: .utf8)!)
-fileHandl.closeFile()
+  }
 
-// print version
+  let fileHandl = try? FileHandle(forWritingTo: URL(fileURLWithPath: path))
+  fileHandl!.write(resultString.data(using: .utf8)!)
+  fileHandl!.closeFile()
+}
+
+// TEST
+main()
+
+
+// PRINT VERSION
 func shell(_ args: [String]) {
     let task = Process()
     task.arguments = args

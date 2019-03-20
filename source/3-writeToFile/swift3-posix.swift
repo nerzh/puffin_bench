@@ -2,6 +2,7 @@
 
 import Foundation
 
+// PAYLOAD
 func main() {
     var count          : Int    = 0
     let path           : String = "./store/swift.txt"
@@ -23,9 +24,11 @@ func main() {
     }
 }
 
+// TEST
 main()
 
-// print version
+
+// PRINT VERSION
 func shell(_ args: [String]) {
     let task = Process()
     task.arguments = args

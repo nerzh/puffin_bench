@@ -73,12 +73,12 @@ exec_bench() {
 # exec_bench './source/2-sortGlobalArray/python2.py'
 
 # Swift
-swiftc -Ounchecked -whole-module-optimization -Xcc -O2 ./source/2-sortGlobalArray/swift2_function.swift -o ./compiled/swift2_function
-swiftc -Ounchecked -whole-module-optimization -Xcc -O2 ./source/2-sortGlobalArray/swift2_class.swift -o ./compiled/swift2_class
-swiftc -Ounchecked -whole-module-optimization -Xcc -O2 ./source/2-sortGlobalArray/swift2_final_class.swift -o ./compiled/swift2_final_class
-exec_bench './compiled/swift2_function'
-exec_bench './compiled/swift2_class'
-exec_bench './compiled/swift2_final_class'
+# swiftc -Ounchecked -whole-module-optimization -Xcc -O2 ./source/2-sortGlobalArray/swift2_function.swift -o ./compiled/swift2_function
+# swiftc -Ounchecked -whole-module-optimization -Xcc -O2 ./source/2-sortGlobalArray/swift2_class.swift -o ./compiled/swift2_class
+# swiftc -Ounchecked -whole-module-optimization -Xcc -O2 ./source/2-sortGlobalArray/swift2_final_class.swift -o ./compiled/swift2_final_class
+# exec_bench './compiled/swift2_function'
+# exec_bench './compiled/swift2_class'
+# exec_bench './compiled/swift2_final_class'
 
 ################################################### 3-writeToFile
 # NodeJS
@@ -88,12 +88,12 @@ exec_bench './compiled/swift2_final_class'
 # exec_bench './source/3-writeToFile/ruby3.rb'
 
 # Swift
-# swiftc -Ounchecked -whole-module-optimization -Xcc -O2 ./source/3-writeToFile/swift3.swift -o ./compiled/swift3
-# exec_bench './compiled/swift3'
+swiftc -Ounchecked -whole-module-optimization -Xcc -O2 ./source/3-writeToFile/swift3.swift -o ./compiled/swift3
+exec_bench './compiled/swift3'
 
 # Swift-POSIX
-# swiftc -Ounchecked -whole-module-optimization -Xcc -O2 ./source/3-writeToFile/swift3-posix.swift -o ./compiled/swift3-posix
-# exec_bench './compiled/swift3-posix'
+swiftc -Ounchecked -whole-module-optimization -Xcc -O2 ./source/3-writeToFile/swift3-posix.swift -o ./compiled/swift3-posix
+exec_bench './compiled/swift3-posix'
 
 # Rust
 # rustc ./source/3-writeToFile/rust3.rs -o ./compiled/rust3
