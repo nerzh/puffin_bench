@@ -1,8 +1,7 @@
-Install:
-1. If on linux don't installed "time": apt-get install time
-2. to clone this repo
-
 Usage:
-1. to go to the path puffin_bench
-2. to change(comment/uncomment) the file run.sh if you need it
-3. run ./run.sh
+1. apt-get install time
+2. git clone https://github.com/woodcrust/puffin_bench.git
+3. cd puffin_bench
+4. ./run.sh
+
+run.sh contains compile commands and commands for execute test code. You can comment any commands if they are not needed

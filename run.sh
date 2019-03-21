@@ -73,10 +73,13 @@ swiftc -Ounchecked -whole-module-optimization -Xcc -O2 ./source/2-sortGlobalArra
 exec_bench './compiled/swift2_function'
 exec_bench './compiled/swift2_class'
 exec_bench './compiled/swift2_final_class'
+<<<<<<< HEAD
 
 # C
 gcc -O2 -o ./compiled/c2.out ./source/2-sortGlobalArray/c2.c
 exec_bench "./compiled/c2.out"
+=======
+>>>>>>> aadf40c36d430e137147fdb5650c9d89ef9ee73e
 
 ################################################### 3-writeToFile
 # NodeJS
