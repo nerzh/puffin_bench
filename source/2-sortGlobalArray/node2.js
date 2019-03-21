@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 
 function shellsSort() {
-  let n    = arr.length
-  let gap  = Math.floor(n/2)
-  let i    = 0
-  let j    = 0
-  let temp = null
+  let n    = arr.length;
+  let gap  = Math.floor(n/2);
+  let i    = 0;
+  let j    = 0;
+  let temp = null;
   
   while (gap > 0) {
     i = gap
@@ -23,13 +23,18 @@ function shellsSort() {
   }
 }
 
-var arr = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
-var c   = 0
+var arr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+var c   = 0;
+var c2  = 0;
 
 while (c < 15000000) {
-  shellsSort()
-  arr = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
-  c = c + 1
+  while(c2 < 10) {
+    arr[c2] = 9 - c2;
+    c2 = c2 + 1;
+  }
+  shellsSort();
+  c  = c + 1;
+  c2 = 0;
 }
 
 console.log('NodeJS sort global array')

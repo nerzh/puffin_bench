@@ -23,13 +23,18 @@ def shellsSort(arr)
   end	
 end
 
-a = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
-c = 0
+arr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+c   = 0
+c2  = 0
 
 while (c < 15000000) do
-  shellsSort(a)
-  a = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
-  c = c + 1
+  while (c2 < 10) do
+    arr[c2] = 9 - c2
+    c2 = c2 + 1
+  end
+  shellsSort(arr)
+  c  = c + 1
+  c2 = 0
 end
 
 p "Ruby #{`ruby -v`}\n"

@@ -43,16 +43,18 @@ func go_version() {
 
 func main() {
     c   := 0
+    c2  := 0
     arr := [10]int{0,0,0,0,0,0,0,0,0,0}
 
     for c < 15000000 {
-        for i := 0; i < 10; i++ {
-          arr[i] = 9 - i
+        for c2 < 10 {
+            arr[c2] = 9 - c2
+            c2 = c2 + 1
         }
         shellsSort(arr)
-        // shellsSort(&arr)
         // pr(arr)
-        c++
+        c  = c + 1
+        c2 = 0
     }
 
     go_version()

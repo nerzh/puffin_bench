@@ -23,13 +23,18 @@ def shellsSort()
   end	
 end
 
-$arr = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
-c    = 0
+$arr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+c   = 0
+c2  = 0
 
 while (c < 15000000) do
+  while (c2 < 10) do
+    $arr[c2] = 9 - c2
+    c2 = c2 + 1
+  end
   shellsSort()
-  $arr = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
-  c    = c + 1
+  c  = c + 1
+  c2 = 0
 end
 
 p "Ruby global array #{`ruby -v`}"

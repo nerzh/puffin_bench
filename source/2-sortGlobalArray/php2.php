@@ -3,7 +3,7 @@
 <?php 
     
   function shellsSort() {
-    $n    = count($GLOBALS["a"]);
+    $n    = count($GLOBALS["arr"]);
     $gap  = intval($n/2);
     $i    = 0;
     $j    = 0;
@@ -12,26 +12,31 @@
     while ($gap > 0) {
       $i = $gap;
       while ($i < $n) {
-        $temp = $GLOBALS["a"][$i];
+        $temp = $GLOBALS["arr"][$i];
         $j    = $i;
-        while ($j >= $gap && $GLOBALS["a"][$j - $gap] > $temp) {
-          $GLOBALS["a"][$j] = $GLOBALS["a"][$j - $gap];
+        while ($j >= $gap && $GLOBALS["arr"][$j - $gap] > $temp) {
+          $GLOBALS["arr"][$j] = $GLOBALS["arr"][$j - $gap];
           $j                = $j - $gap;
         }
-        $GLOBALS["a"][$j] = $temp;
+        $GLOBALS["arr"][$j] = $temp;
         $i                = $i + 1;
       }
       $gap = intval($gap/2);
     }
   }
 
-  $a = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
-  $c = 0;
+  $arr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+  $c   = 0;
+  $c2  = 0;
 
   while ($c < 15000000) {
+    while ($c2 < 10) {
+      $arr[$c2] = 9 - $c2;
+      $c2 = $c2 + 1;
+    }
     shellsSort();
-    $a = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0];
-    $c = $c + 1;
+    $c  = $c + 1;
+    $c2 = 0;
   }
 
   echo "PHP sort global array\n";

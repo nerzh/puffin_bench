@@ -24,16 +24,21 @@ fun shellsSort(arr: Array<Int>) {
   }
 }
 
-var a : Array<Int> = arrayOf(9, 8, 7, 6, 5, 4, 3, 2, 1, 0)
-var c : Int        = 0
+var arr : Array<Int> = arrayOf(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+var c   : Int        = 0
+var c2  : Int        = 0
 
 var current = LocalDateTime.now()
 println("Current Date and Time is: $current")
 
 while (c < 15000000) {
-    shellsSort(a)
-    a = arrayOf(9, 8, 7, 6, 5, 4, 3, 2, 1, 0)
-    c = c + 1
+    while (c2 < 10) {
+        arr[c2] = 9 - c2
+        c2 = c2 + 1
+    }
+    shellsSort(arr)
+    c  = c + 1
+    c2 = 0
 }
 
 current = LocalDateTime.now()

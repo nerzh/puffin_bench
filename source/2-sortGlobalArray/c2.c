@@ -28,16 +28,19 @@ void shellsSort() {
 }
 
 int main() {
-  int c = 0;
+  int c  = 0;
+  int c2 = 0;
   
   arr = (int *) calloc(10, sizeof(int));
 
   while(c < 15000000) {
-    for (int i=0; i<10; i++) {
-      arr[i] = 9 - i;
+    while(c2 < 10) {
+      arr[c2] = 9 - c2;
+      c2 = c2 + 1;
     }
     shellsSort();
-    c = c + 1;
+    c  = c + 1;
+    c2 = 0;
   }
 
   printf("GCC Sort global array %d.%d\n", __GNUC__, __GNUC_MINOR__);

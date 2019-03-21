@@ -30,14 +30,17 @@ func payload() {
   }
 
   func main() {
-    var c : Int = 0
+    var c  : Int = 0
+    var c2 : Int = 0
 
     while (c < 15000000) {
-        for i in 0..<10 {
-            arr[i] = 9 - i
+        while (c2 < 10) {
+            arr[c2] = 9 - c2
+            c2 = c2 + 1
         }
         shellsSort()
-        c = c + 1
+        c  = c + 1
+        c2 = 0
     }
   }
 
