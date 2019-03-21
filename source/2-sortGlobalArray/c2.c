@@ -2,7 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 
-void shellsSort(int *arr) {
+int *arr;
+
+void shellsSort() {
   int n    = 10;
   int gap  = n / 2;
   int i    = 0;
@@ -26,18 +28,19 @@ void shellsSort(int *arr) {
 }
 
 int main() {
-  int *arr = (int *) calloc(10, sizeof(int));
-  int c    = 0;
+  int c = 0;
+  
+  arr = (int *) calloc(10, sizeof(int));
 
   while(c < 15000000) {
     for (int i=0; i<10; i++) {
       arr[i] = 9 - i;
     }
-    shellsSort(arr);
+    shellsSort();
     c = c + 1;
   }
 
-  printf("GCC Sort array %d.%d\n", __GNUC__, __GNUC_MINOR__);
+  printf("GCC Sort global array %d.%d\n", __GNUC__, __GNUC_MINOR__);
   free(arr);
   return 0;
 }

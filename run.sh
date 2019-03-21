@@ -2,23 +2,17 @@ bash -lc 'mkdir ./compiled' 2>/dev/null
 bash -lc 'mkdir ./store' 2>/dev/null
 
 exec_bench() {
+  exec 3>&1 4>&2
   if [ `uname -s` = Linux ]; then
-    exec 3>&1 4>&2
     TT=$( { /usr/bin/time -f '%e sec.' $1 1>&3; } 2>&1 )
-    printf "\033[1m"
-    printf "$TT"
-    printf "\033[0m"
-    echo "";
-    echo "---";
   else
-    exec 3>&1 4>&2
     TT=$( { /usr/bin/time $1 1>&3; } 2>&1 )
-    printf "\033[1m"
-    printf "$TT"
-    printf "\033[0m"
-    echo "";
-    echo "---";
   fi
+  printf "\033[1m"
+  printf "$TT"
+  printf "\033[0m"
+  echo "";
+  echo "---";
 }
 
 
@@ -45,16 +39,16 @@ exec_bench() {
 # exec_bench './source/1-sortArray/elixir.ex'
 
 # Swift
-# swiftc -Ounchecked -whole-module-optimization -Xcc -O2 ./source/1-sortArray/swift.swift -o ./compiled/swift
-# exec_bench './compiled/swift'
+swiftc -Ounchecked -whole-module-optimization -Xcc -O2 ./source/1-sortArray/swift.swift -o ./compiled/swift
+exec_bench './compiled/swift'
 
 # GO
 # go build -o ./compiled/go ./source/1-sortArray/go.go
 # exec_bench './compiled/go'
 
 # C
-# gcc -O2 -o ./compiled/c.out ./source/1-sortArray/c.c
-# exec_bench "./compiled/c.out"
+gcc -O2 -o ./compiled/c.out ./source/1-sortArray/c.c
+exec_bench "./compiled/c.out"
 
 ################################################### 2-sortGlobalArray
 # Perl
@@ -73,12 +67,16 @@ exec_bench() {
 # exec_bench './source/2-sortGlobalArray/python2.py'
 
 # Swift
-# swiftc -Ounchecked -whole-module-optimization -Xcc -O2 ./source/2-sortGlobalArray/swift2_function.swift -o ./compiled/swift2_function
-# swiftc -Ounchecked -whole-module-optimization -Xcc -O2 ./source/2-sortGlobalArray/swift2_class.swift -o ./compiled/swift2_class
-# swiftc -Ounchecked -whole-module-optimization -Xcc -O2 ./source/2-sortGlobalArray/swift2_final_class.swift -o ./compiled/swift2_final_class
-# exec_bench './compiled/swift2_function'
-# exec_bench './compiled/swift2_class'
-# exec_bench './compiled/swift2_final_class'
+swiftc -Ounchecked -whole-module-optimization -Xcc -O2 ./source/2-sortGlobalArray/swift2_function.swift -o ./compiled/swift2_function
+swiftc -Ounchecked -whole-module-optimization -Xcc -O2 ./source/2-sortGlobalArray/swift2_class.swift -o ./compiled/swift2_class
+swiftc -Ounchecked -whole-module-optimization -Xcc -O2 ./source/2-sortGlobalArray/swift2_final_class.swift -o ./compiled/swift2_final_class
+exec_bench './compiled/swift2_function'
+exec_bench './compiled/swift2_class'
+exec_bench './compiled/swift2_final_class'
+
+# C
+gcc -O2 -o ./compiled/c2.out ./source/2-sortGlobalArray/c2.c
+exec_bench "./compiled/c2.out"
 
 ################################################### 3-writeToFile
 # NodeJS

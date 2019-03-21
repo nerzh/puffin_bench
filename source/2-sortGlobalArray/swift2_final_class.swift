@@ -4,7 +4,7 @@ import Foundation
 
 // PAYLOAD
 final class TestGlobalArr {
-  var arr : [Int] = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
+  var arr : [Int] = Array<Int>.init(repeating: 0, count: 10)
 
   func shellsSort() {
     let n    : Int = arr.count
@@ -33,8 +33,10 @@ final class TestGlobalArr {
     var c : Int = 0
 
     while (c < 15000000) {
+        for i in 0..<10 {
+            arr[i] = 9 - i
+        }
         shellsSort()
-        arr = [9, 8, 7, 6, 5, 4, 3, 2, 1, 0]
         c = c + 1
     }
   }

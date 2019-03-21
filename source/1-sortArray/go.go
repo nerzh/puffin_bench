@@ -3,7 +3,7 @@ import "fmt"
 import "os"
 import "os/exec"
 
-func shellsSort(arr []int) []int {
+func shellsSort(arr [10]int) [10]int {
     n    := len(arr)
     gap  := n/2
     i    := 0
@@ -42,11 +42,15 @@ func go_version() {
 }
 
 func main() {
-    c := 0
+    c   := 0
+    arr := [10]int{0,0,0,0,0,0,0,0,0,0}
+
     for c < 15000000 {
-        arr := []int{9,8,7,6,5,4,3,2,1,0}
-        // shellsSort(&arr)
+        for i := 0; i < 10; i++ {
+          arr[i] = 9 - i
+        }
         shellsSort(arr)
+        // shellsSort(&arr)
         // pr(arr)
         c++
     }
