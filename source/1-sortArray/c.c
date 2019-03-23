@@ -40,7 +40,8 @@ int main() {
     c2 = 0;
   }
 
-  printf("GCC Sort array %d.%d\n", __GNUC__, __GNUC_MINOR__);
   free(arr);
+  printf("GCC Sort array\n");
+  printf("GCC Compiler %d.%d\n", __GNUC__, __GNUC_MINOR__);
   return 0;
 }

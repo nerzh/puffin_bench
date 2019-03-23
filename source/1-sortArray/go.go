@@ -3,7 +3,7 @@ import "fmt"
 import "os"
 import "os/exec"
 
-func shellsSort(arr [10]int) [10]int {
+func shellsSort(arr [10]int) {
     n    := len(arr)
     gap  := n/2
     i    := 0
@@ -24,7 +24,6 @@ func shellsSort(arr [10]int) [10]int {
         }
         gap = gap/2
     }
-    return arr
 }
 
 func pr(arr []int){
