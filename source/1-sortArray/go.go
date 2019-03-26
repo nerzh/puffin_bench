@@ -2,13 +2,14 @@ package main
 import "fmt"
 import "os"
 import "os/exec"
+import "strconv"
 
-func shellsSort(arr [10]int) {
-    n    := len(arr)
-    gap  := n/2
-    i    := 0
-    j    := 0
-    temp := 0
+func shellsSort(arr [10]int64) {
+    var n    int64 = int64(len(arr))
+    var gap  int64 = n/2
+    var i    int64 = 0
+    var j    int64 = 0
+    var temp int64 = 0
     
     for gap > 0 {
         i = gap
@@ -26,7 +27,7 @@ func shellsSort(arr [10]int) {
     }
 }
 
-func pr(arr []int){
+func pr(arr []int64){
     for i := 0; i < len(arr); i++ {
         fmt.Println(arr[i])
     }
@@ -41,11 +42,12 @@ func go_version() {
 }
 
 func main() {
-    c   := 0
-    c2  := 0
-    arr := [10]int{0,0,0,0,0,0,0,0,0,0}
-
-    for c < 15000000 {
+    var c  int64 = 0
+    var c2 int64 = 0
+    arr         := [10]int64{0,0,0,0,0,0,0,0,0,0}
+    i, err      := strconv.ParseInt(os.Args[1], 10, 64)
+    if err != nil { os.Stderr.WriteString(err.Error()) }
+    for c < i {
         for c2 < 10 {
             arr[c2] = 9 - c2
             c2 = c2 + 1

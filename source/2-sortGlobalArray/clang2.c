@@ -27,13 +27,14 @@ void shellsSort() {
   }
 }
 
-int main() {
+int main(int argc, char *argv[]) {
   int c  = 0;
   int c2 = 0;
+  int i  = atoi(argv[1]);
   
   arr = (int *) calloc(10, sizeof(int));
 
-  while(c < 15000000) {
+  while(c < i) {
     while(c2 < 10) {
       arr[c2] = 9 - c2;
       c2 = c2 + 1;

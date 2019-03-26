@@ -1,4 +1,5 @@
 use std::process::Command;
+use std::env;
 
 // PAYLOAD
 fn shells_sort(arr: &mut [i64]) {
@@ -26,8 +27,9 @@ fn main() {
     let mut arr : [i64; 10] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     let mut c   : i64       = 0;
     let mut c2  : i64       = 0;
+    let i       : i64       = env::args().nth(1).unwrap().parse::<i64>().unwrap();
 
-    while c < 15000000 {
+    while c < i  {
         while c2 < 10 {
             arr[c2 as usize] = 9 - c2;
             c2 = c2 + 1;

@@ -32,8 +32,9 @@ func payload() {
   func main() {
     var c  : Int = 0
     var c2 : Int = 0
+    let i  : Int   = Int(CommandLine.arguments[1])!
 
-    while (c < 15000000) {
+    while (c < i) {
         while (c2 < 10) {
             arr[c2] = 9 - c2
             c2 = c2 + 1
