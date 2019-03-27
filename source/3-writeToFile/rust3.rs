@@ -20,5 +20,5 @@ fn main() {
 
     
     let output = Command::new("rustc").arg("--version").output().expect("failed to execute process");
-    println!("Rust Write to file: \n{}", String::from_utf8_lossy(&output.stdout));
+    println!("{}", String::from_utf8_lossy(&output.stdout));
 }

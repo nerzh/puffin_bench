@@ -42,4 +42,3 @@ func shell(_ args: [String]) {
     #endif
 }
 shell(["bash", "-lc", "swift --version | grep version"])
-print("Swift POSIX write to file")

@@ -27,5 +27,4 @@ fs.open(path, "a+", function(error, fd) {
   }
 });
 
-console.log('NodeJS write to file')
-console.log('NodeJS ' + process.versions.node)
+console.log('version: ' + process.versions.node)
