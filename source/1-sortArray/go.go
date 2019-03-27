@@ -47,6 +47,7 @@ func main() {
     arr         := [10]int64{0,0,0,0,0,0,0,0,0,0}
     i, err      := strconv.ParseInt(os.Args[1], 10, 64)
     if err != nil { os.Stderr.WriteString(err.Error()) }
+    
     for c < i {
         for c2 < 10 {
             arr[c2] = 9 - c2
@@ -59,5 +60,5 @@ func main() {
     }
 
     go_version()
-    fmt.Println("GO")
+    // fmt.Println("GO")
 }

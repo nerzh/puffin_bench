@@ -26,8 +26,9 @@ end
 arr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 c   = 0
 c2  = 0
+i   = ARGV[0].to_i
 
-while (c < 15000000) do
+while (c < i) do
   while (c2 < 10) do
     arr[c2] = 9 - c2
     c2 = c2 + 1
@@ -37,4 +38,4 @@ while (c < 15000000) do
   c2 = 0
 end
 
-p "Ruby #{`ruby -v`}\n"
+p "#{`ruby -v`}\n"

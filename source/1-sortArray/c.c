@@ -42,7 +42,6 @@ int main(int argc, char *argv[]) {
   }
 
   free(arr);
-  printf("GCC Sort array\n");
   printf("GCC Compiler %d.%d\n", __GNUC__, __GNUC_MINOR__);
   return 0;
 }

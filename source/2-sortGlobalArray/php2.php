@@ -39,8 +39,7 @@
     $c2 = 0;
   }
 
-  echo "PHP sort global array\n";
   $version = phpversion();
-  echo "PHP version: {$version}\n";
+  echo "version: {$version}\n";
 
 ?>

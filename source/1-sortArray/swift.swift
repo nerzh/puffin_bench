@@ -60,5 +60,4 @@ func shell(_ args: [String]) {
     #endif
 }
 
-print("Swift sort array")
 shell(["bash", "-lc", "swift --version | grep version"])

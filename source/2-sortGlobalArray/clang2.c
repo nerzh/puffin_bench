@@ -45,7 +45,6 @@ int main(int argc, char *argv[]) {
   }
 
   free(arr);
-  printf("Clang Sort global array\n");
   printf("Clang Compiler %d.%d\n", __GNUC__, __GNUC_MINOR__);
   return 0;
 }

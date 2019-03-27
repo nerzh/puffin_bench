@@ -1,5 +1,7 @@
 #!/usr/bin/env python
 
+import sys
+
 def shellsSort(arr):
   n    = len(arr)
   gap  = n/2
@@ -23,14 +25,13 @@ def shellsSort(arr):
 arr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 c   = 0
 c2  = 0
+i   = int(sys.argv[1])
 
-while (c < 15000000):
-  while(c2 < 10) {
+while (c < i):
+  while(c2 < 10):
     arr[c2] = 9 - c2
     c2 = c2 + 1
-  }
+
   shellsSort(arr)
   c  = c + 1
   c2 = 0
-
-print("Python\n")

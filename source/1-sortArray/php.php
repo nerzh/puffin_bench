@@ -28,8 +28,9 @@
     $arr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     $c   = 0;
     $c2  = 0;
+    $i   = $argv[0];
 
-    while ($c < 15000000) {
+    while ($c < $i) {
       while ($c2 < 10) {
         $arr[$c2] = 9 - $c2;
         $c2 = $c2 + 1;
@@ -40,6 +41,6 @@
     }
 
     $version = phpversion();
-    echo "PHP version: {$version}\n";
+    echo "version: {$version}\n";
 
 ?>

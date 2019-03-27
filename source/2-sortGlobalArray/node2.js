@@ -26,8 +26,9 @@ function shellsSort() {
 var arr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 var c   = 0;
 var c2  = 0;
-
-while (c < 15000000) {
+var i   = process.argv[2];
+  
+while (c < i) {
   while(c2 < 10) {
     arr[c2] = 9 - c2;
     c2 = c2 + 1;
@@ -37,5 +38,4 @@ while (c < 15000000) {
   c2 = 0;
 }
 
-console.log('NodeJS sort global array')
-console.log('NodeJS ' + process.versions.node)
+console.log('version: ' + process.versions.node)

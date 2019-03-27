@@ -26,8 +26,9 @@ sub shellsSort {
 our @arr = (9, 8, 7, 6, 5, 4, 3, 2, 1, 0);
 my $c   = 0;
 my $c2  = 0;
+my $i   = @ARGV[0] + 0;
 
-while ($c < 15000000) {
+while ($c < $i) {
   while ($c2 < 10) {
     $arr[$c2] = 9 - $c2;
     $c2 = $c2 + 1;
@@ -36,7 +37,5 @@ while ($c < 15000000) {
   $c  = $c + 1;
   $c2 = 0;
 }
-
-print "Perl sort global array\n";
 
 1;

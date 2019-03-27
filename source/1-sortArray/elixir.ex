@@ -83,7 +83,7 @@ defmodule M do
 end
 
 M.main(15000000)
-W.print_string("ELIXIR")
+# W.print_string("ELIXIR")
 
 
 

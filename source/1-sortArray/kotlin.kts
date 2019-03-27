@@ -24,24 +24,26 @@ fun shellsSort(arr: Array<Int>) {
   }
 }
 
-var arr : Array<Int> = arrayOf(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
-var c   : Int        = 0
-var c2  : Int        = 0
+fun main(args: Array<String>) {
+  var arr : Array<Int> = arrayOf(0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+  var c   : Int        = 0
+  var c2  : Int        = 0
+  var i   : Int        = args[0].toInt()
 
-var current = LocalDateTime.now()
-println("Current Date and Time is: $current")
+  // var current = LocalDateTime.now()
+  // println("Current Date and Time is: $current")
 
-while (c < 15000000) {
-    while (c2 < 10) {
-        arr[c2] = 9 - c2
-        c2 = c2 + 1
-    }
-    shellsSort(arr)
-    c  = c + 1
-    c2 = 0
+  while (c < i) {
+      while (c2 < 10) {
+          arr[c2] = 9 - c2
+          c2 = c2 + 1
+      }
+
+      shellsSort(arr)
+      c  = c + 1
+      c2 = 0
+  }
+
+  // current = LocalDateTime.now()
+  // println("Current Date and Time is: $current")
 }
-
-current = LocalDateTime.now()
-println("Current Date and Time is: $current")
-
-println("Kotlin")
