@@ -15,6 +15,11 @@ exec_bench() {
   echo "---";
 }
 
+commandExist() {
+  which $1 > /dev/null && echo '1' && return;
+  echo '0';
+}
+
 DEFAULT_ITERATIONS=25000000
 
 ################################################### 1-sortArray
@@ -22,109 +27,183 @@ printf "\nTEST 1. Sort array\n";
 SORT_ARRAY_ITR=${DEFAULT_ITERATIONS}
 
 # Perl
-# exec_bench "./source/1-sortArray/perl.pl"
+if [ $(commandExist 'perl') == "1" ]; then
+  echo $(perl -v)
+  exec_bench "./source/1-sortArray/perl.pl"
+fi
 
 # PHP
-# exec_bench "./source/1-sortArray/php.php"
+if [ $(commandExist 'php') == "1" ]; then
+  exec_bench "./source/1-sortArray/php.php"
+fi
 
 # NodeJS
-# exec_bench "./source/1-sortArray/node.js"
+if [ $(commandExist 'node') == "1" ]; then
+  exec_bench "./source/1-sortArray/node.js"
+fi
+
 
 # Ruby
-# exec_bench "./source/1-sortArray/ruby.rb"
+if [ $(commandExist 'ruby') == "1" ]; then
+  exec_bench "./source/1-sortArray/ruby.rb"
+fi
+
 
 # Python
-# exec_bench "./source/1-sortArray/python.py"
+if [ $(commandExist 'python') == "1" ]; then
+  exec_bench "./source/1-sortArray/python.py"
+fi
+
 
 # Kotlin
-# exec_bench "./source/1-sortArray/kotlin.kts"
+if [ $(commandExist 'kscript') == "1" ]; then
+  exec_bench "./source/1-sortArray/kotlin.kts"
+fi
+
 
 # Elixir
-# exec_bench "./source/1-sortArray/elixir.ex"
+if [ $(commandExist 'elixir') == "1" ]; then
+  exec_bench "./source/1-sortArray/elixir.ex"
+fi
+
 
 # Swift
-# swiftc -Ounchecked -whole-module-optimization -Xcc -O2 ./source/1-sortArray/swift.swift -o ./compiled/swift
-# exec_bench "./compiled/swift ${SORT_ARRAY_ITR}"
+if [ $(commandExist 'swiftc') == "1" ]; then
+  swiftc -Ounchecked -whole-module-optimization -Xcc -O2 ./source/1-sortArray/swift.swift -o ./compiled/swift
+  exec_bench "./compiled/swift ${SORT_ARRAY_ITR}"
+fi
+
 
 # GO
-# go build -o ./compiled/go ./source/1-sortArray/go.go
-# exec_bench "./compiled/go ${SORT_ARRAY_ITR}"
+if [ $(commandExist 'go') == "1" ]; then
+  go build -o ./compiled/go ./source/1-sortArray/go.go
+  exec_bench "./compiled/go ${SORT_ARRAY_ITR}"
+fi
+
 
 # Scala
-# echo "Scala" && scalac ./source/1-sortArray/scala.scala -optimise -d ./compiled
-# exec_bench "java -classpath ./compiled SortArray ${SORT_ARRAY_ITR}"
-# exec_bench "scala ./source/1-sortArray/scala.scala ${SORT_ARRAY_ITR}"
+if [ $(commandExist 'scalac') == "1" ]; then
+  echo "Scala" && scalac ./source/1-sortArray/scala.scala -optimise -d ./compiled
+  exec_bench "java -classpath ./compiled SortArray ${SORT_ARRAY_ITR}"
+  # exec_bench "scala ./source/1-sortArray/scala.scala ${SORT_ARRAY_ITR}"
+fi
+
 
 # Rust
-# rustc -O ./source/1-sortArray/rust.rs -o ./compiled/rust
-# exec_bench "./compiled/rust ${SORT_ARRAY_ITR}"
+if [ $(commandExist 'rustc') == "1" ]; then
+  rustc -O ./source/1-sortArray/rust.rs -o ./compiled/rust
+  exec_bench "./compiled/rust ${SORT_ARRAY_ITR}"
+fi
+
 
 # C
-# gcc -O2 -o ./compiled/c.out ./source/1-sortArray/c.c
-# exec_bench "./compiled/c.out ${SORT_ARRAY_ITR}"
+if [ $(commandExist 'gcc') == "1" ]; then
+  gcc -O2 -o ./compiled/c.out ./source/1-sortArray/c.c
+  exec_bench "./compiled/c.out ${SORT_ARRAY_ITR}"
+fi
+
 
 # Clang
-# clang -Wall -O2 ./source/1-sortArray/clang.c -o ./compiled/clang.out
-# exec_bench "./compiled/clang.out ${SORT_ARRAY_ITR}"
+if [ $(commandExist 'clang') == "1" ]; then
+  clang -Wall -O2 ./source/1-sortArray/clang.c -o ./compiled/clang.out
+  exec_bench "./compiled/clang.out ${SORT_ARRAY_ITR}"
+fi
+
 
 ################################################### 2-sortGlobalArray
 printf "\nTEST 2. Sort global array\n";
 SORT_GLOBAL_ARRAY_ITR=${DEFAULT_ITERATIONS}
 
 # Perl
-# exec_bench "./source/2-sortGlobalArray/perl2.pl"
+if [ $(commandExist 'perl') == "1" ]; then
+  exec_bench "./source/2-sortGlobalArray/perl2.pl"
+fi
+
 
 # PHP
-# exec_bench "./source/2-sortGlobalArray/php2.php"
+if [ $(commandExist 'php') == "1" ]; then
+  exec_bench "./source/2-sortGlobalArray/php2.php"
+fi
+
 
 # NodeJS
-# exec_bench "./source/2-sortGlobalArray/node2.js"
+if [ $(commandExist 'node') == "1" ]; then
+  exec_bench "./source/2-sortGlobalArray/node2.js"
+fi
+
 
 # Ruby
-# exec_bench "./source/2-sortGlobalArray/ruby2.rb"
+if [ $(commandExist 'ruby') == "1" ]; then
+  exec_bench "./source/2-sortGlobalArray/ruby2.rb"
+fi
 
-# Pythone
-# exec_bench "./source/2-sortGlobalArray/python2.py"
+
+# Python
+if [ $(commandExist 'python') == "1" ]; then
+  exec_bench "./source/2-sortGlobalArray/python2.py"
+fi
+
 
 # Swift
-# swiftc -Ounchecked -whole-module-optimization -Xcc -O2 ./source/2-sortGlobalArray/swift2_function.swift -o ./compiled/swift2_function
-# swiftc -Ounchecked -whole-module-optimization -Xcc -O2 ./source/2-sortGlobalArray/swift2_class.swift -o ./compiled/swift2_class
-# swiftc -Ounchecked -whole-module-optimization -Xcc -O2 ./source/2-sortGlobalArray/swift2_final_class.swift -o ./compiled/swift2_final_class
-# exec_bench "./compiled/swift2_function ${SORT_GLOBAL_ARRAY_ITR}"
-# exec_bench "./compiled/swift2_class ${SORT_GLOBAL_ARRAY_ITR}"
-# exec_bench "./compiled/swift2_final_class ${SORT_GLOBAL_ARRAY_ITR}"
-swiftc ./source/2-sortGlobalArray/swift2_class.swift -o ./compiled/swift2_class
-swiftc ./source/2-sortGlobalArray/swift2_final_class.swift -o ./compiled/swift2_final_class
-exec_bench "./compiled/swift2_class 500000"
-exec_bench "./compiled/swift2_final_class 500000"
+if [ $(commandExist 'swiftc') == "1" ]; then
+  swiftc -Ounchecked -whole-module-optimization -Xcc -O2 ./source/2-sortGlobalArray/swift2_function.swift -o ./compiled/swift2_function
+  swiftc -Ounchecked -whole-module-optimization -Xcc -O2 ./source/2-sortGlobalArray/swift2_class.swift -o ./compiled/swift2_class
+  swiftc -Ounchecked -whole-module-optimization -Xcc -O2 ./source/2-sortGlobalArray/swift2_final_class.swift -o ./compiled/swift2_final_class
+  exec_bench "./compiled/swift2_function ${SORT_GLOBAL_ARRAY_ITR}"
+  exec_bench "./compiled/swift2_class ${SORT_GLOBAL_ARRAY_ITR}"
+  exec_bench "./compiled/swift2_final_class ${SORT_GLOBAL_ARRAY_ITR}"
+fi
+
+
 # C
-# gcc -O2 -o ./compiled/c2.out ./source/2-sortGlobalArray/c2.c
-# exec_bench "./compiled/c2.out ${SORT_GLOBAL_ARRAY_ITR}"
+if [ $(commandExist 'gcc') == "1" ]; then
+  gcc -O2 -o ./compiled/c2.out ./source/2-sortGlobalArray/c2.c
+  exec_bench "./compiled/c2.out ${SORT_GLOBAL_ARRAY_ITR}"
+fi
+
 
 # Clang
-# clang -Wall -O2 ./source/2-sortGlobalArray/clang2.c -o ./compiled/clang2.out
-# exec_bench "./compiled/clang2.out ${SORT_GLOBAL_ARRAY_ITR}"
+if [ $(commandExist 'clang') == "1" ]; then
+  clang -Wall -O2 ./source/2-sortGlobalArray/clang2.c -o ./compiled/clang2.out
+  exec_bench "./compiled/clang2.out ${SORT_GLOBAL_ARRAY_ITR}"
+fi
+
 
 ################################################### 3-writeToFile
 printf "\nTEST 3. Write to file\n";
 
 # NodeJS
-# exec_bench "./source/3-writeToFile/node3.js"
+if [ $(commandExist 'node') == "1" ]; then
+  exec_bench "./source/3-writeToFile/node3.js"
+fi
+
 
 # RUBY
-# exec_bench "./source/3-writeToFile/ruby3.rb"
+if [ $(commandExist 'ruby') == "1" ]; then
+  exec_bench "./source/3-writeToFile/ruby3.rb"
+fi
+
 
 # Swift
-# swiftc -Ounchecked -whole-module-optimization -Xcc -O2 ./source/3-writeToFile/swift3.swift -o ./compiled/swift3
-# exec_bench "./compiled/swift3"
+if [ $(commandExist 'swiftc') == "1" ]; then
+  swiftc -Ounchecked -whole-module-optimization -Xcc -O2 ./source/3-writeToFile/swift3.swift -o ./compiled/swift3
+  exec_bench "./compiled/swift3"
+fi
+
 
 # Swift-POSIX
-# swiftc -Ounchecked -whole-module-optimization -Xcc -O2 ./source/3-writeToFile/swift3-posix.swift -o ./compiled/swift3-posix
-# exec_bench "./compiled/swift3-posix"
+if [ $(commandExist 'swiftc') == "1" ]; then
+  swiftc -Ounchecked -whole-module-optimization -Xcc -O2 ./source/3-writeToFile/swift3-posix.swift -o ./compiled/swift3-posix
+  exec_bench "./compiled/swift3-posix"
+fi
+
 
 # Rust
-# rustc -O ./source/3-writeToFile/rust3.rs -o ./compiled/rust3
-# exec_bench "./compiled/rust3"
+if [ $(commandExist 'rustc') == "1" ]; then
+  rustc -O ./source/3-writeToFile/rust3.rs -o ./compiled/rust3
+  exec_bench "./compiled/rust3"
+fi
+
 ################################################### 4-Thread
 # ... coming soon ...
 
