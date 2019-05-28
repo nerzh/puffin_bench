@@ -20,7 +20,8 @@ commandExist() {
   echo '0';
 }
 
-DEFAULT_ITERATIONS=25000000
+# DEFAULT_ITERATIONS=25000000
+DEFAULT_ITERATIONS=3500000
 
 ################################################### 1-sortArray
 printf "\nTEST 1. Sort array\n";
