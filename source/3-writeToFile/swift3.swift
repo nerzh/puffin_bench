@@ -4,19 +4,21 @@ import Foundation
 
 // PAYLOAD
 func main() {
-  var count          : Int    = 0
-  let path           : String = "./store/swift.txt"
-  let templateString : String = "test_text\n"
-  var resultString   : String = ""
+    var count          : Int         = 0
+    let path           : String      = "./store/swift.txt"
+    let templateString : String      = "test_text\n"
+    var resultString   : String      = ""
+    let fileManager    : FileManager = FileManager.default
+    let fileHandl      : FileHandle? = try? FileHandle(forWritingTo: URL(fileURLWithPath: path))
 
-  while (count < 8000000) {
-    resultString.append(templateString)
-    count += 1
-  }
+    while (count < 8000000) {
+        resultString.append(templateString)
+        count += 1
+    }
 
-  let fileHandl = try? FileHandle(forWritingTo: URL(fileURLWithPath: path))
-  fileHandl!.write(resultString.data(using: .utf8)!)
-  fileHandl!.closeFile()
+    if !fileManager.fileExists(atPath: path) { fileManager.createFile(atPath: path, contents: nil, attributes: nil) }
+    fileHandl!.write(resultString.data(using: .utf8)!)
+    fileHandl!.closeFile()
 }
 
 // TEST
