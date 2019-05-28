@@ -29,49 +29,49 @@ SORT_ARRAY_ITR=${DEFAULT_ITERATIONS}
 # Perl
 if [ $(commandExist 'perl') == "1" ]; then
   echo "Perl sort array by reference"
-  # echo $(perl -v)
-  # exec_bench "./source/1-sortArray/perl.pl ${SORT_ARRAY_ITR}"
+  echo $(perl -v)
+  exec_bench "./source/1-sortArray/perl.pl ${SORT_ARRAY_ITR}"
 fi
 
 # PHP
 if [ $(commandExist 'php') == "1" ]; then
   echo "PHP sort array by reference"
-  # exec_bench "./source/1-sortArray/php.php ${SORT_ARRAY_ITR}"
+  exec_bench "./source/1-sortArray/php.php ${SORT_ARRAY_ITR}"
 fi
 
 # NodeJS
 if [ $(commandExist 'node') == "1" ]; then
   echo "NodeJS sort array by reference"
-  # exec_bench "./source/1-sortArray/node.js ${SORT_ARRAY_ITR}"
+  exec_bench "./source/1-sortArray/node.js ${SORT_ARRAY_ITR}"
 fi
 
 
 # Ruby
 if [ $(commandExist 'ruby') == "1" ]; then
   echo "Ruby sort array by reference"
-  # exec_bench "./source/1-sortArray/ruby.rb ${SORT_ARRAY_ITR}"
+  exec_bench "./source/1-sortArray/ruby.rb ${SORT_ARRAY_ITR}"
 fi
 
 
 # Python
 if [ $(commandExist 'python') == "1" ]; then
   echo "Python sort array by reference"
-  # exec_bench "./source/1-sortArray/python.py ${SORT_ARRAY_ITR}"
+  exec_bench "./source/1-sortArray/python.py ${SORT_ARRAY_ITR}"
 fi
 
 
 # Kotlin
 if [ $(commandExist 'kotlinc') == "1" ]; then
   echo "Kotlin sort array by reference"
-  # kotlinc kotlin.kts -include-runtime -d ./compiled/kotlin.jar
-  # exec_bench "java -jar ./source/1-sortArray/kotlin.jar ${SORT_ARRAY_ITR}"
+  kotlinc kotlin.kts -include-runtime -d ./compiled/kotlin.jar
+  exec_bench "java -jar ./source/1-sortArray/kotlin.jar ${SORT_ARRAY_ITR}"
 fi
 
 
 # Elixir
 if [ $(commandExist 'elixir') == "1" ]; then
   echo "Elixir sort array by reference"
-  # exec_bench "./source/1-sortArray/elixir.ex ${SORT_ARRAY_ITR}"
+  exec_bench "./source/1-sortArray/elixir.ex ${SORT_ARRAY_ITR}"
 fi
 
 
@@ -86,24 +86,24 @@ fi
 # GO
 if [ $(commandExist 'go') == "1" ]; then
   echo "GO sort array by reference"
-  # go build -o ./compiled/go ./source/1-sortArray/go.go
-  # exec_bench "./compiled/go ${SORT_ARRAY_ITR}"
+  go build -o ./compiled/go ./source/1-sortArray/go.go
+  exec_bench "./compiled/go ${SORT_ARRAY_ITR}"
 fi
 
 
 # Scala
 if [ $(commandExist 'scalac') == "1" ]; then
   echo "Scala sort array by reference"
-  # scalac ./source/1-sortArray/scala.scala -optimise -d ./compiled
-  # exec_bench "java -classpath ./compiled SortArray ${SORT_ARRAY_ITR}"
+  scalac ./source/1-sortArray/scala.scala -optimise -d ./compiled
+  exec_bench "java -classpath ./compiled SortArray ${SORT_ARRAY_ITR}"
 fi
 
 
 # Rust
 if [ $(commandExist 'rustc') == "1" ]; then
   echo "Rust sort array by reference"
-  # rustc -O ./source/1-sortArray/rust.rs -o ./compiled/rust
-  # exec_bench "./compiled/rust ${SORT_ARRAY_ITR}"
+  rustc -O ./source/1-sortArray/rust.rs -o ./compiled/rust
+  exec_bench "./compiled/rust ${SORT_ARRAY_ITR}"
 fi
 
 
@@ -130,35 +130,35 @@ SORT_GLOBAL_ARRAY_ITR=${DEFAULT_ITERATIONS}
 # Perl
 if [ $(commandExist 'perl') == "1" ]; then
   echo "Perl sort gloabl array"
-  # exec_bench "./source/2-sortGlobalArray/perl2.pl ${SORT_ARRAY_ITR}"
+  exec_bench "./source/2-sortGlobalArray/perl2.pl ${SORT_ARRAY_ITR}"
 fi
 
 
 # PHP
 if [ $(commandExist 'php') == "1" ]; then
   echo "PHP sort gloabl array"
-  # exec_bench "./source/2-sortGlobalArray/php2.php ${SORT_ARRAY_ITR}"
+  exec_bench "./source/2-sortGlobalArray/php2.php ${SORT_ARRAY_ITR}"
 fi
 
 
 # NodeJS
 if [ $(commandExist 'node') == "1" ]; then
   echo "NodeJS sort gloabl array"
-  # exec_bench "./source/2-sortGlobalArray/node2.js ${SORT_ARRAY_ITR}"
+  exec_bench "./source/2-sortGlobalArray/node2.js ${SORT_ARRAY_ITR}"
 fi
 
 
 # Ruby
 if [ $(commandExist 'ruby') == "1" ]; then
   echo "Ruby sort gloabl array"
-  # exec_bench "./source/2-sortGlobalArray/ruby2.rb ${SORT_ARRAY_ITR}"
+  exec_bench "./source/2-sortGlobalArray/ruby2.rb ${SORT_ARRAY_ITR}"
 fi
 
 
 # Python
 if [ $(commandExist 'python') == "1" ]; then
   echo "Python sort gloabl array"
-  # exec_bench "./source/2-sortGlobalArray/python2.py ${SORT_ARRAY_ITR}"
+  exec_bench "./source/2-sortGlobalArray/python2.py ${SORT_ARRAY_ITR}"
 fi
 
 
@@ -198,14 +198,14 @@ printf "\nTEST 3. Write to file\n";
 # NodeJS
 if [ $(commandExist 'node') == "1" ]; then
   echo "NodeJS write to file"
-  # exec_bench "./source/3-writeToFile/node3.js"
+  exec_bench "./source/3-writeToFile/node3.js"
 fi
 
 
 # RUBY
 if [ $(commandExist 'ruby') == "1" ]; then
   echo "RUBY write to file"
-  # exec_bench "./source/3-writeToFile/ruby3.rb"
+  exec_bench "./source/3-writeToFile/ruby3.rb"
 fi
 
 
@@ -228,8 +228,8 @@ fi
 # Rust
 if [ $(commandExist 'rustc') == "1" ]; then
   echo "Rust write to file"
-  # rustc -O ./source/3-writeToFile/rust3.rs -o ./compiled/rust3
-  # exec_bench "./compiled/rust3"
+  rustc -O ./source/3-writeToFile/rust3.rs -o ./compiled/rust3
+  exec_bench "./compiled/rust3"
 fi
 
 ################################################### 4-Thread
