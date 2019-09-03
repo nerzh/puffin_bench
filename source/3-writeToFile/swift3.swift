@@ -9,16 +9,18 @@ func main() {
     let templateString : String      = "test_text\n"
     var resultString   : String      = ""
     let fileManager    : FileManager = FileManager.default
-    let fileHandl      : FileHandle? = try? FileHandle(forWritingTo: URL(fileURLWithPath: path))
 
     while (count < 8000000) {
         resultString.append(templateString)
         count += 1
     }
 
-    if !fileManager.fileExists(atPath: path) { fileManager.createFile(atPath: path, contents: nil, attributes: nil) }
-    fileHandl!.write(resultString.data(using: .utf8)!)
-    fileHandl!.closeFile()
+    if !fileManager.fileExists(atPath: path) {
+      fileManager.createFile(atPath: path, contents: nil, attributes: nil) 
+    }
+    let fileHandl : FileHandle = try! FileHandle(forWritingTo: URL(fileURLWithPath: path))
+    fileHandl.write(resultString.data(using: .utf8)!)
+    fileHandl.closeFile()
 }
 
 // TEST
