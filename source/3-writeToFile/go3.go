@@ -46,9 +46,8 @@ func main() {
 		err := fo.Close()
 		check(err)
 	}()
-	length, err := fo.WriteString(resultString.String())
+	_, err = fo.WriteString(resultString.String())
 	check(err)
-	fmt.Println(length, "bytes written successfully")
 
 	goVersion()
 
