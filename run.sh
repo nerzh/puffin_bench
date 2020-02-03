@@ -83,21 +83,21 @@ elixirSortArray() {
   fi
 }
 
-swiftSortArray() {
-  # Swift
-  if [ $(commandExist 'swiftc') == "1" ]; then
-    echo "Swift sort array by reference"
-    swiftc -Ounchecked -whole-module-optimization ./source/1-sortArray/swift.swift -o ./compiled/swift
-    exec_bench "./compiled/swift ${SORT_ARRAY_ITR}"
-  fi
-}
-
 goSortArray() {
   # GO
   if [ $(commandExist 'go') == "1" ]; then
     echo "GO sort array by reference"
     go build -o ./compiled/go ./source/1-sortArray/go.go
     exec_bench "./compiled/go ${SORT_ARRAY_ITR}"
+  fi
+}
+
+swiftSortArray() {
+  # Swift
+  if [ $(commandExist 'swiftc') == "1" ]; then
+    echo "Swift sort array by reference"
+    swiftc -Ounchecked -whole-module-optimization ./source/1-sortArray/swift.swift -o ./compiled/swift
+    exec_bench "./compiled/swift ${SORT_ARRAY_ITR}"
   fi
 }
 
@@ -182,6 +182,15 @@ pythonSortGlobalArray() {
   fi
 }
 
+goSortGlobalArray() {
+  # GO
+  if [ $(commandExist 'go') == "1" ]; then
+    echo "GO sort gloabl array"
+    go build -o ./compiled/go2 ./source/2-sortGlobalArray/go2.go
+    exec_bench "./compiled/go2 ${SORT_ARRAY_ITR}"
+  fi
+}
+
 swiftSortGlobalArray() {
   # Swift
   if [ $(commandExist 'swiftc') == "1" ]; then
@@ -233,6 +242,15 @@ rubyWriteToFile() {
   if [ $(commandExist 'ruby') == "1" ]; then
     echo "RUBY write to file"
     exec_bench "./source/3-writeToFile/ruby3.rb"
+  fi
+}
+
+goWriteToFile() {
+  # GO
+  if [ $(commandExist 'go') == "1" ]; then
+    echo "GO write to file"
+    go build -o ./compiled/go3 ./source/3-writeToFile/go3.go
+    exec_bench "./compiled/go3 ${SORT_ARRAY_ITR}"
   fi
 }
 
@@ -303,6 +321,7 @@ sortGlobalArray() {
   nodejsSortGlobalArray
   rubySortGlobalArray
   pythonSortGlobalArray
+  goSortGlobalArray
   swiftSortGlobalArray
   gccSortGlobalArray
   clangSortGlobalArray

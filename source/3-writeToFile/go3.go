@@ -1,72 +1,55 @@
 package main
 
 import (
-    // "bufio"
-    "fmt"
-    "io/ioutil"
-    "os"
-    "os/exec"
-    "bytes"
+	"bytes"
+	"fmt"
+	"os"
+	"os/exec"
 )
 
 func check(e error) {
-    if e != nil {
-        panic(e)
-    }
+	if e != nil {
+		panic(e)
+	}
 }
 
-func go_version() {
-    output, err := exec.Command("go", "version").CombinedOutput()
-    if err != nil {
-        os.Stderr.WriteString(err.Error())
-    }
-    fmt.Println(string(output))
+func goVersion() {
+	output, err := exec.Command("go", "version").CombinedOutput()
+	if err != nil {
+		os.Stderr.WriteString(err.Error())
+	}
+	fmt.Println(string(output))
 }
 
 func main() {
 
-    count             := 0
-    path              := "./store/go.txt"
-    template_string   := "test_text\n"
-    // var result_string []string
-    var result_string bytes.Buffer
+	count := 0
+	path := "./store"
+	fileName := "go.txt"
+	templateString := "test_text\n"
+	var resultString bytes.Buffer
 
-    for count < 8000000 {
-        // var strs []string
-        // result_string = append(result_string, template_string)
-        result_string.WriteString(template_string)
-        count = count + 1;
-    }
+	for count < 8000000 {
+		resultString.WriteString(templateString)
+		count = count + 1
+	}
 
-    // d1 := []byte(result_string)
-    // err := ioutil.WriteFile(path, d1, 0775)
-    // err := ioutil.WriteFile(path, []byte(result_string), 0775)
-    // err := ioutil.WriteFile(path, result_string, 0775)
-    // check(err)
+	if _, err := os.Stat(path); os.IsNotExist(err) {
+		err := os.MkdirAll(path, os.ModePerm)
+		check(err)
+	}
 
-    fo, err := os.Create(path)
-    if err != nil {
-        panic(err)
-    }
-    defer func() {
-        if err := fo.Close(); err != nil {
-            panic(err)
-        }
-    }()
+	fo, err := os.Create(path + "/" + fileName)
+	check(err)
 
-    if _, err := fo.Write(result_string); err != nil {
-        panic(err)
-    }
+	defer func() {
+		err := fo.Close()
+		check(err)
+	}()
+	length, err := fo.WriteString(resultString.String())
+	check(err)
+	fmt.Println(length, "bytes written successfully")
 
-    // f, err := os.Create("/tmp/dat2")
-    // check(err)
-
-    // w := bufio.NewWriter(f)
-    // n4, err := w.WriteString(result_string)
-    // fmt.Printf("wrote %d bytes\n", n4)
-
-    // w.Flush()
-
-    go_version()
+	goVersion()
 
 }
