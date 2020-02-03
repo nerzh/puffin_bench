@@ -341,7 +341,7 @@ writeToFile() {
 
 
 
-# sortArray
-# sortGlobalArray
+sortArray
+sortGlobalArray
 writeToFile
 
