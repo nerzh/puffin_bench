@@ -332,6 +332,7 @@ writeToFile() {
 
   nodejsWriteToFile
   rubyWriteToFile
+  goWriteToFile
   swiftWriteToFile
   swiftPOSIXWriteToFile
   rustWriteToFile
