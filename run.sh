@@ -61,9 +61,9 @@ commandExist() {
 
 # DEFAULT_ITERATIONS=25000000
 DEFAULT_ITERATIONS=1500000
-EXECUTE_LOW_PERFORMANCE_ITERATIONS=1
-EXECUTE_MIDDLE_PERFORMANCE_ITERATIONS=30
-EXECUTE_HIGH_PERFORMANCE_ITERATIONS=30
+EXECUTE_LOW_PERFORMANCE_ITERATIONS=2
+EXECUTE_MIDDLE_PERFORMANCE_ITERATIONS=5
+EXECUTE_HIGH_PERFORMANCE_ITERATIONS=40
 WRITE_FILE_ITERATIONS=5
 
 ################################################### 1-sortArray
@@ -263,7 +263,7 @@ nodejsSortGlobalArray() {
   # NodeJS
   if [ $(commandExist 'node') == "1" ]; then
     dir="./source/2-sortGlobalArray/node2.js ${SORT_ARRAY_ITR}"
-    iterations=$EXECUTE_HIGH_PERFORMANCE_ITERATIONS
+    iterations=$EXECUTE_LOW_PERFORMANCE_ITERATIONS
     title="NodeJS sort gloabl array"
     result=$(execution_block "$dir" "$iterations" "$title")
     node -v
@@ -275,7 +275,7 @@ rubySortGlobalArray() {
   # Ruby
   if [ $(commandExist 'ruby') == "1" ]; then
     dir="./source/2-sortGlobalArray/ruby2.rb ${SORT_ARRAY_ITR}"
-    iterations=$EXECUTE_HIGH_PERFORMANCE_ITERATIONS
+    iterations=$EXECUTE_LOW_PERFORMANCE_ITERATIONS
     title="Ruby sort gloabl array"
     result=$(execution_block "$dir" "$iterations" "$title")
     ruby -v
@@ -287,7 +287,7 @@ pythonSortGlobalArray() {
   # Python
   if [ $(commandExist 'python') == "1" ]; then
     dir="./source/2-sortGlobalArray/python2.py ${SORT_ARRAY_ITR}"
-    iterations=$EXECUTE_HIGH_PERFORMANCE_ITERATIONS
+    iterations=$EXECUTE_LOW_PERFORMANCE_ITERATIONS
     title="Python sort gloabl array"
     result=$(execution_block "$dir" "$iterations" "$title")
     python --version
