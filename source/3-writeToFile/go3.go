@@ -49,6 +49,6 @@ func main() {
 	_, err = fo.WriteString(resultString.String())
 	check(err)
 
-	goVersion()
+	// goVersion()
 
 }

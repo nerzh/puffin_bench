@@ -64,5 +64,5 @@ func main() {
 		c2 = 0
 	}
 
-	goVersion()
+	// goVersion()
 }

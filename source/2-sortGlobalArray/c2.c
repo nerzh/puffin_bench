@@ -45,6 +45,6 @@ int main(int argc, char *argv[]) {
   }
 
   free(arr);
-  printf("GCC Compiler %d.%d\n", __GNUC__, __GNUC_MINOR__);
+  // printf("GCC Compiler %d.%d\n", __GNUC__, __GNUC_MINOR__);
   return 0;
 }

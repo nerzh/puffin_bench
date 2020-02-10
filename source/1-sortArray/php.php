@@ -40,7 +40,7 @@
       $c2 = 0;
     }
 
-    $version = phpversion();
-    echo "version: {$version}\n";
+//    $version = phpversion();
+//    echo "version: {$version}\n";
 
 ?>

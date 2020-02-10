@@ -1,6 +1,6 @@
 use std::fs::File;
 use std::io::{Write, BufWriter};
-use std::process::Command;
+// use std::process::Command;
 
 fn main() {
 
@@ -19,6 +19,6 @@ fn main() {
     f.write_all(result_string.as_bytes()).expect("Unable to write data");
 
     
-    let output = Command::new("rustc").arg("--version").output().expect("failed to execute process");
-    println!("{}", String::from_utf8_lossy(&output.stdout));
+    // let output = Command::new("rustc").arg("--version").output().expect("failed to execute process");
+    // println!("{}", String::from_utf8_lossy(&output.stdout));
 }

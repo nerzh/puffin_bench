@@ -38,4 +38,4 @@ while (c < i) {
   c2 = 0;
 }
 
-console.log('version: ' + process.versions.node)
+// console.log('version: ' + process.versions.node)

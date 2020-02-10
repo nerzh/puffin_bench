@@ -38,4 +38,4 @@ while (c < i) do
   c2 = 0
 end
 
-p "#{`ruby -v`}"
+# p "#{`ruby -v`}"

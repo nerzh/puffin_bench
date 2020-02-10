@@ -27,4 +27,4 @@ fs.open(path, "a+", function(error, fd) {
   }
 });
 
-console.log('version: ' + process.versions.node)
+// console.log('version: ' + process.versions.node)

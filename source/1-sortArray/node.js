@@ -42,4 +42,4 @@ function main() {
 
 main()
 
-console.log('version: ' + process.versions.node);
+// console.log('version: ' + process.versions.node);

@@ -21,4 +21,4 @@ File.open(path, File::WRONLY) do |file|
   file.write(resultString)
 end
 
-p `ruby -v`
+# p `ruby -v`

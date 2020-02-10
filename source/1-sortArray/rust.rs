@@ -1,4 +1,4 @@
-use std::process::Command;
+// use std::process::Command;
 use std::env;
 
 // PAYLOAD
@@ -39,6 +39,6 @@ fn main() {
         c2 = 0;
     }
     
-    let output = Command::new("rustc").arg("--version").output().expect("failed to execute process");
-    println!("{}", String::from_utf8_lossy(&output.stdout));
+    // let output = Command::new("rustc").arg("--version").output().expect("failed to execute process");
+    // println!("{}", String::from_utf8_lossy(&output.stdout));
 }

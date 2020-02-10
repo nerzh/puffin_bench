@@ -41,4 +41,4 @@ func shell(_ args: [String]) {
     task.launch()
     #endif
 }
-shell(["bash", "-lc", "swift --version | grep version"])
+//shell(["bash", "-lc", "swift --version | grep version"])
