@@ -4,7 +4,7 @@ import sys
 
 def shellsSort():
   n    = len(arr)
-  gap  = n/2
+  gap  = int(n/2)
   i    = 0
   j    = 0
   temp = None
@@ -19,7 +19,7 @@ def shellsSort():
         j      = j - gap
       arr[j] = temp
       i      = i + 1
-    gap = gap/2
+    gap = int(gap/2)
     
 
 arr = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
