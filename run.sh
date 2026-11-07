@@ -76,9 +76,10 @@ SMALL_STRING_BENCHMARKS=(
 )
 
 APPEND_BASE_BENCHMARKS=(
+  rustAppendWithBase
   swiftAppendWithBase
   rustAppendWithBaseCow
-  rustAppendWithBase
+  swiftAppendWithBaseOptimized
 )
 
 # Timing/output helpers and per-language compile + run functions.
@@ -110,10 +111,10 @@ appendWithBase() {
 }
 
 run_all() {
-  sortArray
-  sortGlobalArray
-  writeToFile
-  smallStringPushBack
+  # sortArray
+  # sortGlobalArray
+  # writeToFile
+  # smallStringPushBack
   appendWithBase
 }
 

@@ -20,14 +20,12 @@ func nowNS() -> Int64 {
 func run(_ iterations: Int) -> Int {
     let base = String(repeating: "x", count: 10_000)
     var results: [String] = []
-    results.reserveCapacity(iterations)
-    
     for i in 0..<iterations {
         var s = base
         if i % 1000 == 0 {
             s += "!"
         }
-        results.append(consume s)
+        results.append(s)
     }
     var total = 0
     for s in results {

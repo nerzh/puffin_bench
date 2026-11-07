@@ -295,6 +295,18 @@ swiftAppendWithBase() {
 }
 
 
+swiftAppendWithBaseOptimized() {
+  local BENCH_HEADER_TITLE
+  local BENCH_WORK_KIND=append_base
+  benchmark_header "Swift — append with base (Optimized)"
+  require_tools swiftc || return 0
+  swiftc --version || return
+  swiftc -O -whole-module-optimization -module-cache-path "$BUILD_DIR/swift-cache" "$SOURCE_DIR/5-appendWithBase/swift5-optimized.swift" -o "$BUILD_DIR/swift5-optimized" || return
+  benchmark "Swift — append with base (Optimized)" "$BENCH_RUNS" \
+    "$BUILD_DIR/swift5-optimized" "$APPEND_BASE_ITR" "$APPEND_BASE_WARMUP"
+}
+
+
 # Go ---------------------------------------------------------------------------
 goSortArray() {
   local BENCH_HEADER_TITLE
