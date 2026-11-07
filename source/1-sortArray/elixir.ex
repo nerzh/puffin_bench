@@ -1,89 +1,69 @@
-#!/usr/bin/env elixir
+import Bitwise
 
-defmodule W do
-  def halt() do
-    IO.puts "halt"
-    System.halt(0)
-  end
-
-  def print_tuple(t, n) do
-    if n < tuple_size(t) do
-    # if n < length(t) do
-      IO.puts "#{element(t, n)}"
-      print_tuple(t, n + 1)
-    end
-  end
-
-  def print_string(s) do
-    IO.puts "#{s}"
-  end
-
-  def element(temp_tuple, position) do
-    elem(temp_tuple, position)
-    # Enum.at(temp_tuple, position)
-  end
-
-  def change_tuple(tuple, position, value) do
-    Tuple.insert_at(Tuple.delete_at(tuple, position), position, value)
-    # List.replace_at(tuple, position, value)
-  end
-end
-
-defmodule M do
-  def while3(j, gap, arr, temp) do
-    if j >= gap and W.element(arr, j - gap) > temp do
-      arr = W.change_tuple(arr, j, W.element(arr, j - gap))
-      j   = j - gap
-      while3(j, gap, arr, temp)
+defmodule SortArray do
+  import Bitwise
+  def shift(arr, j, gap, temp) do
+    if j >= gap and elem(arr, j - gap) > temp do
+      shift(put_elem(arr, j, elem(arr, j - gap)), j - gap, gap, temp)
     else
-      {j, arr}
+      put_elem(arr, j, temp)
     end
   end
-
-  def while2(gap, arr, n, i) do
-    if i < n do
-      temp       = W.element(arr, i)
-      j          = i
-      temp_tuple = while3(j, gap, arr, temp)
-      arr        = W.change_tuple(elem(temp_tuple, 1), elem(temp_tuple, 0), temp)
-      i          = i + 1
-      while2(gap, arr, n, i)
+  def pass(arr, i, gap) do
+    if i < tuple_size(arr) do
+      pass(shift(arr, i, gap, elem(arr, i)), i + 1, gap)
     else
       arr
     end
   end
-
-  def while1(gap, arr, n) do
+  def shells_sort(arr, gap) do
     if gap > 0 do
-      i = gap
-      arr = while2(gap, arr, n, i)
-      gap = Kernel.trunc(gap/2)
-      while1(gap, arr, n)
+      shells_sort(pass(arr, gap, gap), div(gap, 2))
     else
       arr
     end
   end
-
-  def shellsSort(arr) do
-    n   = tuple_size(arr)
-    # n   = length(arr)
-    gap = Kernel.trunc(n/2)
-    while1(gap, arr, n)
-  end
-
-  def main(n) do
-    if n > 0 do
-      arr = {9,8,7,6,5,4,3,2,1,0}
-      # arr = [9,8,7,6,5,4,3,2,1,0]
-      shellsSort(arr)
-      # print_tuple(z, 0)
-      main(n - 1)
+  def fill(arr, state, k) do
+    if k < tuple_size(arr) do
+      state = (state * 1664525 + 1013904223) &&& 2147483647
+      fill(put_elem(arr, k, (state >>> 8) &&& 65535), state, k + 1)
+    else
+      {arr, state}
     end
   end
+  def hash(arr, checksum, k) do
+    if k < tuple_size(arr) do
+      hash(arr, (checksum * 31 + elem(arr, k)) &&& 2147483647, k + 1)
+    else
+      checksum
+    end
+  end
+  def run(arr, iterations, state, checksum \\ 0) do
+    if iterations > 0 do
+      {arr, state} = fill(arr, state, 0)
+      arr = shells_sort(arr, div(tuple_size(arr), 2))
+      run(arr, iterations - 1, state, hash(arr, checksum, 0))
+    else
+      checksum
+    end
+  end
+  def argument(args, index, fallback) do
+    value = case Enum.at(args, index) do
+      nil -> fallback
+      text -> String.to_integer(text)
+    end
+    if value < 0 or value > 2147483647, do: raise("Invalid argument")
+    value
+  end
 end
-
-M.main(15000000)
-# W.print_string("ELIXIR")
-
-
-
+args = System.argv()
+if length(args) < 1 or length(args) > 3, do: raise("iterations [seed [warmup]]")
+iterations = SortArray.argument(args, 0, 0)
+seed = SortArray.argument(args, 1, 12345)
+warmup = SortArray.argument(args, 2, 10000)
+arr = :erlang.make_tuple(100, 0)
+warmup_checksum = SortArray.run(arr, warmup, seed)
+start = System.monotonic_time(:nanosecond)
+checksum = SortArray.run(arr, iterations, seed)
+elapsed = System.monotonic_time(:nanosecond) - start
+IO.puts("elapsed_ns=#{elapsed} checksum=#{checksum} warmup_checksum=#{warmup_checksum}")

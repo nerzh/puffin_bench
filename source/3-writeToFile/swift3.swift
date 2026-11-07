@@ -1,43 +1,50 @@
-#!/usr/bin/env swift
+#if canImport(Darwin)
+import Darwin
+#else
+import Glibc
+#endif
+
+func argument(_ index: Int, _ fallback: Int) -> Int {
+    if CommandLine.arguments.count <= index { return fallback }
+    guard let value = Int(CommandLine.arguments[index]), value >= 0, value <= 2147483647 else {
+        fatalError("Arguments must be integers in 0...2147483647")
+    }
+    return value
+}
+func nowNS() -> Int64 {
+    var value = timespec()
+    guard clock_gettime(CLOCK_MONOTONIC, &value) == 0 else { fatalError("clock_gettime failed") }
+    return Int64(value.tv_sec) * 1_000_000_000 + Int64(value.tv_nsec)
+}
 
 import Foundation
 
-// PAYLOAD
+func run(_ iterations: Int) -> Int {
+    let template = "test_text\n"
+    var result = ""
+    var count = 0
+    while count < iterations {
+        result.append(template)
+        count = count + 1
+    }
+    let path = "./store/swift.txt"
+    if !FileManager.default.fileExists(atPath: path) {
+        guard FileManager.default.createFile(atPath: path, contents: nil) else { fatalError("createFile failed") }
+    }
+    let file = try! FileHandle(forWritingTo: URL(fileURLWithPath: path))
+    try! file.truncate(atOffset: 0)
+    try! file.write(contentsOf: Data(result.utf8))
+    try! file.close()
+    return result.utf8.count
+}
 func main() {
-    var count          : Int         = 0
-    let path           : String      = "./store/swift.txt"
-    let templateString : String      = "test_text\n"
-    var resultString   : String      = ""
-    let fileManager    : FileManager = FileManager.default
-
-    while (count < 8000000) {
-        resultString.append(templateString)
-        count += 1
-    }
-
-    if !fileManager.fileExists(atPath: path) {
-      fileManager.createFile(atPath: path, contents: nil, attributes: nil) 
-    }
-    let fileHandl : FileHandle = try! FileHandle(forWritingTo: URL(fileURLWithPath: path))
-    fileHandl.write(resultString.data(using: .utf8)!)
-    fileHandl.closeFile()
+    guard CommandLine.arguments.count <= 3 else { fatalError("lines [warmup_lines]") }
+    let iterations = argument(1, 80000000)
+    let warmup = argument(2, 10000)
+    let warmupBytes = run(warmup)
+    let start = nowNS()
+    let bytes = run(iterations)
+    let elapsed = nowNS() - start
+    print("elapsed_ns=\(elapsed) bytes=\(bytes) warmup_bytes=\(warmupBytes)")
 }
-
-// TEST
 main()
-
-
-// PRINT VERSION
-func shell(_ args: [String]) {
-    let task = Process()
-    task.arguments = args
-    
-    #if swift(>=5)
-    task.executableURL = URL.init(fileURLWithPath: "/usr/bin/env")
-    try? task.run()
-    #else
-    task.launchPath = "/usr/bin/env"
-    task.launch()
-    #endif
-}
-//shell(["bash", "-lc", "swift --version | grep version"])

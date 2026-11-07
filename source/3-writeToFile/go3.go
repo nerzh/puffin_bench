@@ -1,54 +1,53 @@
 package main
 
 import (
-	"bytes"
 	"fmt"
 	"os"
-	"os/exec"
+	"strconv"
+	"strings"
+	"time"
 )
 
-func check(e error) {
-	if e != nil {
-		panic(e)
+func argument(index int, fallback int) int {
+	if len(os.Args) <= index {
+		return fallback
 	}
+	value, err := strconv.Atoi(os.Args[index])
+	if err != nil || value < 0 || value > 2147483647 {
+		panic("Invalid count")
+	}
+	return value
 }
-
-func goVersion() {
-	output, err := exec.Command("go", "version").CombinedOutput()
+func check(err error) {
 	if err != nil {
-		os.Stderr.WriteString(err.Error())
+		panic(err)
 	}
-	fmt.Println(string(output))
 }
-
-func main() {
-
+func run(iterations int) int {
+	const template = "test_text\n"
+	var result strings.Builder
 	count := 0
-	path := "./store"
-	fileName := "go.txt"
-	templateString := "test_text\n"
-	var resultString bytes.Buffer
-
-	for count < 8000000 {
-		resultString.WriteString(templateString)
+	for count < iterations {
+		result.WriteString(template)
 		count = count + 1
 	}
-
-	if _, err := os.Stat(path); os.IsNotExist(err) {
-		err := os.MkdirAll(path, os.ModePerm)
-		check(err)
+	file, err := os.Create("./store/go.txt")
+	check(err)
+	_, err = file.WriteString(result.String())
+	closeErr := file.Close()
+	check(err)
+	check(closeErr)
+	return result.Len()
+}
+func main() {
+	if len(os.Args) > 3 {
+		panic("lines [warmup_lines]")
 	}
-
-	fo, err := os.Create(path + "/" + fileName)
-	check(err)
-
-	defer func() {
-		err := fo.Close()
-		check(err)
-	}()
-	_, err = fo.WriteString(resultString.String())
-	check(err)
-
-	// goVersion()
-
+	iterations := argument(1, 80000000)
+	warmup := argument(2, 10000)
+	warmupBytes := run(warmup)
+	start := time.Now()
+	size := run(iterations)
+	elapsed := time.Since(start).Nanoseconds()
+	fmt.Printf("elapsed_ns=%d bytes=%d warmup_bytes=%d\n", elapsed, size, warmupBytes)
 }

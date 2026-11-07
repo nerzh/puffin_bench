@@ -3,22 +3,27 @@ package main
 import (
 	"fmt"
 	"os"
-	"os/exec"
 	"strconv"
+	"time"
 )
 
-func shellsSort(arr []int64) {
-	var n int64 = int64(len(arr))
-	var gap int64 = n / 2
-	var i int64 = 0
-	var j int64 = 0
-	var temp int64 = 0
-
+func argument(index int, fallback int64) int64 {
+	if len(os.Args) <= index {
+		return fallback
+	}
+	value, err := strconv.ParseInt(os.Args[index], 10, 64)
+	if err != nil || value < 0 || value > 2147483647 {
+		panic("Arguments must be in 0..2147483647")
+	}
+	return value
+}
+func shellsSort(arr *[100]int64) {
+	gap := len(arr) / 2
 	for gap > 0 {
-		i = gap
-		for i < n {
-			temp = arr[i]
-			j = i
+		i := gap
+		for i < len(arr) {
+			temp := arr[i]
+			j := i
 			for j >= gap && arr[j-gap] > temp {
 				arr[j] = arr[j-gap]
 				j = j - gap
@@ -29,38 +34,38 @@ func shellsSort(arr []int64) {
 		gap = gap / 2
 	}
 }
-
-func goVersion() {
-	output, err := exec.Command("go", "version").CombinedOutput()
-	if err != nil {
-		os.Stderr.WriteString(err.Error())
-	}
-	fmt.Println(string(output))
-}
-
-func main() {
-	var c int64 = 0
-	var c2 int64 = 0
-	var iterationCount int64 = 0
-	arr := [10]int64{0, 0, 0, 0, 0, 0, 0, 0, 0, 0}
-	if len(os.Args) > 1 {
-		i, err := strconv.ParseInt(os.Args[1], 10, 64)
-		if err != nil {
-			os.Stderr.WriteString(err.Error())
-		} else {
-			iterationCount = i
+func run(arr *[100]int64, iterations, seed int64) int64 {
+	state := seed
+	var checksum int64
+	c := int64(0)
+	for c < iterations {
+		k := 0
+		for k < len(arr) {
+			state = (state*1664525 + 1013904223) & 2147483647
+			arr[k] = (state >> 8) & 65535
+			k = k + 1
 		}
-	}
-
-	for c < iterationCount {
-		for c2 < 10 {
-			arr[c2] = 9 - c2
-			c2 = c2 + 1
+		shellsSort(arr)
+		k = 0
+		for k < len(arr) {
+			checksum = (checksum*31 + arr[k]) & 2147483647
+			k = k + 1
 		}
-		shellsSort(arr[:])
 		c = c + 1
-		c2 = 0
 	}
-
-	// goVersion()
+	return checksum
+}
+func main() {
+	if len(os.Args) < 2 || len(os.Args) > 4 {
+		panic("iterations [seed [warmup]]")
+	}
+	iterations := argument(1, 0)
+	seed := argument(2, 12345)
+	warmup := argument(3, 10000)
+	var arr [100]int64
+	warmupChecksum := run(&arr, warmup, seed)
+	start := time.Now()
+	checksum := run(&arr, iterations, seed)
+	elapsed := time.Since(start).Nanoseconds()
+	fmt.Printf("elapsed_ns=%d checksum=%d warmup_checksum=%d\n", elapsed, checksum, warmupChecksum)
 }
