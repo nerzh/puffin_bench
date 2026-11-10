@@ -13,6 +13,10 @@ SMALL_STRING_ITR=${SMALL_STRING_ITR:-50000000}
 SMALL_STRING_WARMUP=${SMALL_STRING_WARMUP:-10000}
 APPEND_BASE_ITR=${APPEND_BASE_ITR:-5000000}
 APPEND_BASE_WARMUP=${APPEND_BASE_WARMUP:-10000}
+# Benchmarks Game uses n=12; n=7 is a quick correctness check.
+FANNKUCH_N=${FANNKUCH_N:-12}
+# Benchmarks Game uses 16000; 200 checks the published reference image.
+MANDELBROT_SIZE=${MANDELBROT_SIZE:-16000}
 PHP=${PHP:-php}
 GCC=${GCC:-gcc}
 ZIG=${ZIG:-zig}
@@ -82,6 +86,21 @@ APPEND_BASE_BENCHMARKS=(
   swiftAppendWithBaseOptimized
 )
 
+FANNKUCH_BENCHMARKS=(
+  rustFannkuchRedux
+  swiftFannkuchRedux
+  swiftFannkuchReduxOptimized
+  swiftFannkuchReduxSIMD
+)
+
+MANDELBROT_BENCHMARKS=(
+  rustMandelbrot
+  swiftMandelbrot
+  swiftMandelbrotRust
+  swiftMandelbrotOptimized
+  swiftMandelbrotAnalytic
+)
+
 # Timing/output helpers and per-language compile + run functions.
 BENCH_ROOT=$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)
 SOURCE_DIR="$BENCH_ROOT/source"
@@ -110,12 +129,31 @@ appendWithBase() {
   run_suite "Test 5 — Append with base" "${APPEND_BASE_BENCHMARKS[@]}"
 }
 
+fannkuchRedux() {
+  run_suite "Test 6 — Fannkuch-redux (n=$FANNKUCH_N)" "${FANNKUCH_BENCHMARKS[@]}"
+}
+
+mandelbrot() (
+  if [[ ! $MANDELBROT_SIZE =~ ^[1-9][0-9]{0,6}$ ]] || ((MANDELBROT_SIZE % 8 != 0)); then
+    printf 'ERROR: MANDELBROT_SIZE must be a multiple of 8 in 8...9999992.\n' >&2
+    return 1
+  fi
+  require_tools cmp cksum || return 1
+  local reference_dir BENCH_REFERENCE_FILE
+  reference_dir=$(mktemp -d "$BUILD_DIR/mandelbrot.XXXXXX") || return
+  trap 'rm -rf "$reference_dir"' EXIT
+  BENCH_REFERENCE_FILE="$reference_dir/reference.pbm"
+  run_suite "Test 7 — Mandelbrot (${MANDELBROT_SIZE} x ${MANDELBROT_SIZE})" "${MANDELBROT_BENCHMARKS[@]}"
+)
+
 run_all() {
-  # sortArray
-  # sortGlobalArray
-  # writeToFile
-  # smallStringPushBack
+  sortArray
+  sortGlobalArray
+  writeToFile
+  smallStringPushBack
   appendWithBase
+  fannkuchRedux
+  mandelbrot
 }
 
 # Sourcing defines the functions without starting the suites.

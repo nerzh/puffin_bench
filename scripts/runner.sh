@@ -57,6 +57,41 @@ resource_report() {
     -f "$BENCH_ROOT/scripts/resource-report.awk" "$@"
 }
 
+mandelbrot_report() {
+  local file first=$1 header expected_bytes bytes checksum
+  printf -v header 'P4\n%s %s' "$MANDELBROT_SIZE" "$MANDELBROT_SIZE"
+  expected_bytes=$(( ${#header} + 1 + MANDELBROT_SIZE * MANDELBROT_SIZE / 8 ))
+  for file in "$@"; do
+    bytes=$(wc -c < "$file") || return
+    if [[ $bytes -ne $expected_bytes || $(head -n 2 "$file") != "$header" ]]; then
+      printf 'ERROR: invalid PBM header or byte count.\n' >&2
+      return 1
+    fi
+    if ! cmp -s "$first" "$file"; then
+      printf 'ERROR: Mandelbrot images differ between runs.\n' >&2
+      return 1
+    fi
+  done
+  checksum=$(cksum < "$first") || return
+  # Published N=200 reference: download/mandelbrot-output.txt on Benchmarks Game.
+  if [[ $MANDELBROT_SIZE == 200 && $checksum != '1085075796 5011' ]]; then
+    printf 'ERROR: Mandelbrot image differs from the published N=200 reference.\n' >&2
+    return 1
+  fi
+  if [[ -n ${BENCH_REFERENCE_FILE:-} ]]; then
+    if [[ -f $BENCH_REFERENCE_FILE ]]; then
+      if ! cmp -s "$BENCH_REFERENCE_FILE" "$first"; then
+        printf 'ERROR: Mandelbrot images differ between implementations.\n' >&2
+        return 1
+      fi
+    else
+      cp "$first" "$BENCH_REFERENCE_FILE" || return
+    fi
+  fi
+  printf 'PBM: %s x %s, %s bytes\nChecksum (POSIX cksum): %s\n' \
+    "$MANDELBROT_SIZE" "$MANDELBROT_SIZE" "$expected_bytes" "${checksum%% *}"
+}
+
 benchmark() (
   # A subshell keeps cwd, locale and cleanup traps out of the caller's shell.
   local title=$1 repeats=$2 timings workload report platform i status run_file
@@ -77,7 +112,7 @@ benchmark() (
     printf 'ERROR: /usr/bin/time is required (Ubuntu/Debian: sudo apt install time).\n' >&2
     return 1
   fi
-  timings=$(mktemp -d "${TMPDIR:-/tmp}/puffin-bench.XXXXXX") || return
+  timings=$(mktemp -d "$BUILD_DIR/puffin-bench.XXXXXX") || return
   trap 'rm -rf "$timings"' EXIT
   mkdir "$timings/resources" "$timings/workloads" || return
   if [[ -z ${BENCH_HEADER_TITLE:-} ]]; then benchmark_header "$title"; fi
@@ -88,13 +123,18 @@ benchmark() (
       :
     else
       status=$?
-      cat "$timings/workloads/$run_file" >&2
+      if [[ ${BENCH_WORK_KIND:-} != mandelbrot ]]; then
+        cat "$timings/workloads/$run_file" >&2
+      fi
       printf 'ERROR: command or resource measurement for %s failed on run %s (exit %s).\n' "$title" "$((i + 1))" "$status" >&2
       return "$status"
     fi
   done
 
-  if ! workload=$(LC_ALL=C awk -v expected="$repeats" -v work_kind="${BENCH_WORK_KIND:-}" -f "$BENCH_ROOT/scripts/workload-report.awk" "$timings/workloads/"*); then
+  if [[ ${BENCH_WORK_KIND:-} == mandelbrot ]]; then
+    workload=$(mandelbrot_report "$timings/workloads/"*) || return
+  elif ! workload=$(LC_ALL=C awk -v expected="$repeats" -v work_kind="${BENCH_WORK_KIND:-}" \
+    -v expected_n="${FANNKUCH_N:-}" -f "$BENCH_ROOT/scripts/workload-report.awk" "$timings/workloads/"*); then
     printf 'ERROR: invalid workload output or inconsistent checksums for %s.\n' "$title" >&2
     return 1
   fi

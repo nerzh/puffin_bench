@@ -1,6 +1,24 @@
-# Strict, portable awk parser for the one-line payload protocol.
+# Strict, portable awk parser for workload payloads and Benchmarks Game output.
 # No GNU awk extensions: macOS ships a different awk.
 FNR == 1 { files++ }
+work_kind == "fannkuch" {
+    if (FNR == 1 && NF == 1 && $1 ~ /^-?[0-9]+$/) {
+        if (files == 1) check = $1
+        if ($1 != check) invalid = 1
+    } else if (FNR == 2 && NF == 3 && $1 ~ /^Pfannkuchen\([0-9]+\)$/ &&
+               $2 == "=" && $3 ~ /^[0-9]+$/) {
+        input = $1
+        sub(/^Pfannkuchen\(/, "", input)
+        sub(/\)$/, "", input)
+        if (input + 0 != expected_n + 0) invalid = 1
+        if (files == 1) flips = $3
+        if ($3 != flips) invalid = 1
+        n++
+    } else {
+        invalid = 1
+    }
+    next
+}
 {
     if (FNR != 1 || NF != 3) { invalid = 1; next }
     split($1, timing, "="); split($2, result, "="); split($3, warmup, "=")
@@ -15,6 +33,13 @@ FNR == 1 { files++ }
 }
 END {
     if (invalid || files != expected || n != expected) exit 1
+    if (work_kind == "fannkuch") {
+        # Published reference outputs for the validation and performance inputs.
+        if (expected_n == 7 && (check != 228 || flips != 16)) exit 1
+        if (expected_n == 12 && (check != 3968050 || flips != 65)) exit 1
+        printf "Checksum: %s\nPfannkuchen(%d) = %s\n", check, expected_n, flips
+        exit
+    }
     if (work_kind == "sort")
         label = "Total sorting time"
     else if (work_kind == "small_string")

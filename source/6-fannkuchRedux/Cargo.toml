@@ -1,0 +1,17 @@
+[package]
+name = "fannkuch-redux"
+version = "0.1.0"
+edition = "2021"
+publish = false
+license = "BSD-3-Clause"
+
+[[bin]]
+name = "fannkuch-redux"
+path = "rust6.rs"
+
+[dependencies]
+rayon = "1.10"
+
+[profile.release]
+opt-level = 3
+codegen-units = 1

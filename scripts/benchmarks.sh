@@ -307,6 +307,102 @@ swiftAppendWithBaseOptimized() {
 }
 
 
+swiftFannkuchRedux() {
+  local BENCH_HEADER_TITLE
+  local BENCH_WORK_KIND=fannkuch
+  benchmark_header "Swift — fannkuch-redux (Benchmarks Game #3)"
+  require_tools swiftc || return 0
+  swiftc --version || return
+  # Match the upstream optimization flags; retain the native two-line output.
+  swiftc -Ounchecked -whole-module-optimization -module-cache-path "$BUILD_DIR/swift-cache" \
+    "$SOURCE_DIR/6-fannkuchRedux/swift6.swift" -o "$BUILD_DIR/swift6" || return
+  benchmark "Swift — fannkuch-redux (Benchmarks Game #3)" "$BENCH_RUNS" \
+    "$BUILD_DIR/swift6" "$FANNKUCH_N"
+}
+
+swiftFannkuchReduxOptimized() {
+  local BENCH_HEADER_TITLE
+  local BENCH_WORK_KIND=fannkuch
+  benchmark_header "Swift — fannkuch-redux (InlineArray, noncopyable)"
+  require_tools swiftc || return 0
+  swiftc --version || return
+  # Use the same flags as the baseline so only the storage/ownership changes differ.
+  swiftc -Ounchecked -whole-module-optimization -module-cache-path "$BUILD_DIR/swift-cache" \
+    "$SOURCE_DIR/6-fannkuchRedux/swift6-optimized.swift" -o "$BUILD_DIR/swift6-optimized" || return
+  benchmark "Swift — fannkuch-redux (InlineArray, noncopyable)" "$BENCH_RUNS" \
+    "$BUILD_DIR/swift6-optimized" "$FANNKUCH_N"
+}
+
+swiftFannkuchReduxSIMD() {
+  local BENCH_HEADER_TITLE
+  local BENCH_WORK_KIND=fannkuch
+  benchmark_header "Swift — fannkuch-redux (Rust #6 algorithm; native SIMD)"
+  require_tools swiftc || return 0
+  swiftc --version || return
+  # Use the toolchain's builtin intrinsics directly from this single Swift source.
+  swiftc -Ounchecked -whole-module-optimization -target-cpu native -Xcc -march=native \
+    -module-cache-path "$BUILD_DIR/swift-cache" \
+    "$SOURCE_DIR/6-fannkuchRedux/swift6-simd.swift" -o "$BUILD_DIR/swift6-simd" || return
+  benchmark "Swift — fannkuch-redux (Rust #6 algorithm; native SIMD)" "$BENCH_RUNS" \
+    "$BUILD_DIR/swift6-simd" "$FANNKUCH_N"
+}
+
+
+swiftMandelbrot() {
+  local BENCH_HEADER_TITLE
+  local BENCH_WORK_KIND=mandelbrot
+  benchmark_header "Swift — mandelbrot (Swift #7 algorithm; UniqueArray, Span)"
+  require_tools swiftc || return 0
+  swiftc --version || return
+  swiftc -O -whole-module-optimization -target-cpu native \
+    -module-cache-path "$BUILD_DIR/swift-cache" \
+    "$SOURCE_DIR/7-mandelbrot/swift7.swift" -o "$BUILD_DIR/swift7" || return
+  benchmark "Swift — mandelbrot (Swift #7 algorithm; UniqueArray, Span)" "$BENCH_RUNS" \
+    "$BUILD_DIR/swift7" "$MANDELBROT_SIZE"
+}
+
+
+swiftMandelbrotRust() {
+  local BENCH_HEADER_TITLE
+  local BENCH_WORK_KIND=mandelbrot
+  benchmark_header "Swift — mandelbrot (Rust #4 algorithm; InlineArray)"
+  require_tools swiftc || return 0
+  swiftc --version || return
+  swiftc -O -whole-module-optimization -target-cpu native \
+    -module-cache-path "$BUILD_DIR/swift-cache" \
+    "$SOURCE_DIR/7-mandelbrot/swift7-rust.swift" -o "$BUILD_DIR/swift7-rust" || return
+  benchmark "Swift — mandelbrot (Rust #4 algorithm; InlineArray)" "$BENCH_RUNS" \
+    "$BUILD_DIR/swift7-rust" "$MANDELBROT_SIZE"
+}
+
+
+swiftMandelbrotOptimized() {
+  local BENCH_HEADER_TITLE
+  local BENCH_WORK_KIND=mandelbrot
+  benchmark_header "Swift — mandelbrot (Rust #4 iteration; public SIMD8)"
+  require_tools swiftc || return 0
+  swiftc --version || return
+  swiftc -O -whole-module-optimization -target-cpu native \
+    -module-cache-path "$BUILD_DIR/swift-cache" \
+    "$SOURCE_DIR/7-mandelbrot/swift7-optimized.swift" -o "$BUILD_DIR/swift7-optimized" || return
+  benchmark "Swift — mandelbrot (Rust #4 iteration; public SIMD8)" "$BENCH_RUNS" \
+    "$BUILD_DIR/swift7-optimized" "$MANDELBROT_SIZE"
+}
+
+swiftMandelbrotAnalytic() {
+  local BENCH_HEADER_TITLE
+  local BENCH_WORK_KIND=mandelbrot
+  benchmark_header "Swift — mandelbrot (analytic interior checks; different algorithm)"
+  require_tools swiftc || return 0
+  swiftc --version || return
+  swiftc -O -whole-module-optimization -target-cpu native -D ANALYTIC_INTERIOR \
+    -module-cache-path "$BUILD_DIR/swift-cache" \
+    "$SOURCE_DIR/7-mandelbrot/swift7-optimized.swift" -o "$BUILD_DIR/swift7-analytic" || return
+  benchmark "Swift — mandelbrot (analytic interior checks; different algorithm)" "$BENCH_RUNS" \
+    "$BUILD_DIR/swift7-analytic" "$MANDELBROT_SIZE"
+}
+
+
 # Go ---------------------------------------------------------------------------
 goSortArray() {
   local BENCH_HEADER_TITLE
@@ -456,6 +552,35 @@ rustAppendWithBaseCow() {
   rustc -O -C overflow-checks=yes -C codegen-units=1 "$SOURCE_DIR/5-appendWithBase/rust5-cow.rs" -o "$BUILD_DIR/rust5-cow" || return
   benchmark "Rust — append with base (Cow)" "$BENCH_RUNS" \
     "$BUILD_DIR/rust5-cow" "$APPEND_BASE_ITR" "$APPEND_BASE_WARMUP"
+}
+
+
+rustFannkuchRedux() {
+  local BENCH_HEADER_TITLE
+  local BENCH_WORK_KIND=fannkuch
+  benchmark_header "Rust — fannkuch-redux (Benchmarks Game #6; native SIMD)"
+  require_tools cargo rustc || return 0
+  rustc -V || return
+  # Keep Rayon and all Cargo build/cache files inside the project.
+  CARGO_HOME="$BUILD_DIR/cargo-home" CARGO_TARGET_DIR="$BUILD_DIR/fannkuch-rust" \
+    RUSTFLAGS="-C target-cpu=native" cargo build --release --locked \
+    --manifest-path "$SOURCE_DIR/6-fannkuchRedux/Cargo.toml" || return
+  benchmark "Rust — fannkuch-redux (Benchmarks Game #6; native SIMD)" "$BENCH_RUNS" \
+    "$BUILD_DIR/fannkuch-rust/release/fannkuch-redux" "$FANNKUCH_N"
+}
+
+
+rustMandelbrot() {
+  local BENCH_HEADER_TITLE
+  local BENCH_WORK_KIND=mandelbrot
+  benchmark_header "Rust — mandelbrot (Benchmarks Game #4; unmodified source)"
+  require_tools cargo rustc || return 0
+  rustc -V || return
+  CARGO_HOME="$BUILD_DIR/cargo-home" CARGO_TARGET_DIR="$BUILD_DIR/mandelbrot-rust" \
+    RUSTFLAGS="-C target-cpu=native" cargo build --release --locked \
+    --manifest-path "$SOURCE_DIR/7-mandelbrot/Cargo.toml" || return
+  benchmark "Rust — mandelbrot (Benchmarks Game #4; unmodified source)" "$BENCH_RUNS" \
+    "$BUILD_DIR/mandelbrot-rust/release/mandelbrot" "$MANDELBROT_SIZE"
 }
 
 

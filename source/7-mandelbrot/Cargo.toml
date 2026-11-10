@@ -1,0 +1,17 @@
+[package]
+name = "mandelbrot"
+version = "0.1.0"
+edition = "2021"
+publish = false
+license = "BSD-3-Clause"
+
+[[bin]]
+name = "mandelbrot"
+path = "rust7.rs"
+
+[dependencies]
+rayon = "1.10"
+
+[profile.release]
+opt-level = 3
+codegen-units = 1
